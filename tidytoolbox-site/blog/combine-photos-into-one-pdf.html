@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Combine Multiple Photos into One PDF | TidyToolbox</title>
+<meta name="description" content="Turn a stack of receipts, a scanned form, or photos of notebook pages into one clean PDF file, free and directly in your browser.">
+<link rel="canonical" href="https://tidytoolbox.online/blog/combine-photos-into-one-pdf.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="TidyToolbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Combine Multiple Photos into One PDF | TidyToolbox">
+<meta property="og:description" content="Turn a stack of receipts, a scanned form, or photos of notebook pages into one clean PDF file, free and directly in your browser.">
+<meta property="og:url" content="https://tidytoolbox.online/blog/combine-photos-into-one-pdf.html">
+<meta property="og:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Combine Multiple Photos into One PDF | TidyToolbox">
+<meta name="twitter:description" content="Turn a stack of receipts, a scanned form, or photos of notebook pages into one clean PDF file, free and directly in your browser.">
+<meta name="twitter:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="../assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ============================================================
+     GOOGLE ADSENSE: SITE-WIDE CODE (goes once per page, in <head>)
+     1. Replace ca-pub-3325482013695295 with your own publisher ID
+        (AdSense account > Account > Account information).
+     2. Uncomment the script tag below.
+     3. Keep this on every page you want ads to appear on.
+   ============================================================ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325482013695295" crossorigin="anonymous"></script>
+<style>
+
+:root{
+  --surface:#E7E8E2;
+  --surface-panel:#F5F6F1;
+  --ink:#1B1E1C;
+  --graphite:#585B52;
+  --safelight:#B23A2E;
+  --safelight-dark:#8F2E24;
+  --scan:#2E6E86;
+  --scan-light:#7FB4C6;
+  --line: rgba(27,30,26,0.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit;}
+main{flex:1 0 auto;}
+
+.site-header{
+  max-width:960px; margin:0 auto; width:100%; padding:28px 24px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.brand{font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.site-nav{display:flex; gap:24px; flex-wrap:wrap;}
+.site-nav a{font-size:0.85rem; font-weight:500; color:var(--graphite); text-decoration:none; padding:4px 0; border-bottom:1.5px solid transparent;}
+.site-nav a:hover{color:var(--scan);}
+.site-nav a.active{color:var(--ink); border-bottom-color:var(--safelight);}
+
+.ad-slot{
+  width:100%; min-height:90px; border:1px dashed rgba(27,30,26,0.22); border-radius:4px;
+  display:flex; align-items:center; justify-content:center; margin-bottom:40px;
+  background:rgba(245,246,241,0.5);
+}
+.ad-slot-label{font-size:0.68rem; letter-spacing:0.08em; color:var(--graphite); opacity:0.6;}
+
+.btn{
+  display:inline-block; border:none; border-radius:5px; padding:12px 22px;
+  font-size:0.9rem; font-weight:600; cursor:pointer; text-decoration:none;
+  transition:background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary{background:var(--safelight); color:#fff;}
+.btn-primary:hover{background:var(--safelight-dark); transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,30,26,0.16);}
+
+.content-page{max-width:680px; margin:0 auto; padding:8px 24px 64px;}
+.tag{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--scan); margin:0 0 14px; display:block;}
+.content-page h1{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.9rem, 4vw, 2.6rem); margin:0 0 8px; letter-spacing:-0.01em;}
+.content-page .updated{font-size:0.78rem; color:var(--graphite); margin:0 0 36px;}
+.content-page h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:38px 0 12px;}
+.content-page p{font-size:0.98rem; line-height:1.7; color:var(--ink); margin:0 0 16px;}
+.content-page ul,.content-page ol{margin:0 0 16px; padding-left:22px; font-size:0.98rem; line-height:1.7;}
+.content-page li{margin-bottom:6px;}
+.content-page a{color:var(--scan); text-decoration:underline; text-underline-offset:2px;}
+.content-page .btn-primary{color:#fff; text-decoration:none;}
+.content-page hr{border:none; border-top:1px solid var(--line); margin:40px 0;}
+
+.cta-box{
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:8px;
+  padding:24px; margin:28px 0; text-align:center;
+}
+.cta-box p{margin:0 0 16px;}
+
+.site-footer{max-width:960px; width:100%; margin:0 auto; padding:0 24px 40px;}
+.footer-row{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--line); padding-top:18px; font-size:0.74rem; color:var(--graphite);
+}
+.footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+.footer-nav a{color:var(--graphite); text-decoration:none;}
+.footer-nav a:hover{color:var(--scan);}
+
+a:focus-visible{outline:2px solid var(--scan); outline-offset:2px;}
+
+@media (max-width:520px){
+  .site-header{padding:22px 16px 16px;}
+  .content-page{padding:8px 16px 48px;}
+}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="../index.html" class="brand">TidyToolbox</a>
+  <nav class="site-nav">
+    <a href="../tools.html">Tools</a>
+    <a href="../how-to-use.html">How to use</a>
+    <a href="index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy-policy.html">Privacy</a>
+  </nav>
+</header>
+<main class="content-page">
+  <span class="tag">PDF</span>
+  <h1>How to combine multiple photos into one PDF</h1>
+  <p class="updated mono">A short, practical guide.</p>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <p>A stack of receipts, a signed form photographed page by page, a few pages of handwritten notes, there are plenty of everyday moments where you end up with several photos that really should be one PDF instead. Here is the simplest way to get there.</p>
+
+  <h2>Why turn photos into a PDF at all</h2>
+  <p>A single PDF is easier to email, easier to name and file away, and easier for whoever receives it to open and read in order. Sending someone six separate photos of a signed contract, in whatever order your phone happens to list them, is a worse experience for everyone involved than sending one document.</p>
+
+  <h2>How to combine photos into one PDF</h2>
+  <ol>
+    <li>Open the <a href="../photo-to-pdf.html">photo to PDF converter</a> on TidyToolbox.</li>
+    <li>Drop in your photos, or drag in a whole folder if they are all saved together already.</li>
+    <li>Reorder them if needed, so the pages read in the right sequence.</li>
+    <li>Choose a look, the original photo, or a filter that sharpens text and flattens color for a cleaner scanned appearance.</li>
+    <li>Download the finished PDF.</li>
+  </ol>
+  <p>Everything happens in your browser. The photos are never uploaded to a server.</p>
+
+  <div class="cta-box">
+    <p><strong>Have a stack of photos to turn into a PDF?</strong></p>
+    <a href="../photo-to-pdf.html" class="btn btn-primary">Open the photo to PDF converter</a>
+  </div>
+
+  <h2>Getting a cleaner, more scan like result</h2>
+  <p>A photo taken at an angle, under yellowish indoor lighting, will look noticeably better with a filter applied than left as is. If the document is mostly text, a filter that increases contrast and reduces color makes it easier to read and looks closer to an actual scan rather than a photo of a page.</p>
+  <p>Good lighting when you take the photo matters more than any filter afterward. A document photographed near a window in daylight will need very little correction.</p>
+
+  <h2>One file at a time versus a whole folder</h2>
+  <p>For two or three photos, adding them individually is quick enough. For anything larger, a stack of twenty receipts, every page of a notebook, dragging in the entire folder at once and letting the tool handle the order is considerably faster than picking files one by one.</p>
+
+  <hr>
+  <p>Need to convert a single image's format instead? See the <a href="../image-converter.html">image format converter</a>, or browse <a href="../tools.html">all tools</a> on TidyToolbox.</p>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to combine multiple photos into one PDF",
+  "url": "https://tidytoolbox.online/blog/combine-photos-into-one-pdf.html",
+  "description": "Turn a stack of receipts, a scanned form, or photos of notebook pages into one clean PDF file, free and directly in your browser.",
+  "author": {
+    "@type": "Organization",
+    "name": "TidyToolbox"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TidyToolbox",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tidytoolbox.online/assets/app-icon-512.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tidytoolbox.online/blog/combine-photos-into-one-pdf.html"
+  },
+  "image": "https://tidytoolbox.online/assets/app-icon-512.png",
+  "datePublished": "2026-07-22",
+  "dateModified": "2026-07-25"
+}
+</script>
+
+<footer class="site-footer">
+  <div class="footer-row">
+    <span class="mono">© 2026 TidyToolbox</span>
+    <nav class="footer-nav">
+      <a href="../about.html">About</a>
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

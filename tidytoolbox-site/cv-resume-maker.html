@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Resume Builder – Make a CV Online, Download PDF, No Sign Up | TidyToolbox</title>
+<meta name="description" content="Build a resume or CV online free and download it as a PDF instantly — no sign up and no payment wall at download. 10 clean templates, with or without a photo, with a live preview as you type.">
+<link rel="canonical" href="https://tidytoolbox.online/cv-resume-maker.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="TidyToolbox">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Resume Builder – Make a CV Online, Download PDF, No Sign Up | TidyToolbox">
+<meta property="og:description" content="Build a resume or CV online free and download it as a PDF instantly — no sign up and no payment wall at download. 10 clean templates, with or without a photo, with a live preview as you type.">
+<meta property="og:url" content="https://tidytoolbox.online/cv-resume-maker.html">
+<meta property="og:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free Resume Builder – Make a CV Online, Download PDF, No Sign Up | TidyToolbox">
+<meta name="twitter:description" content="Build a resume or CV online free and download it as a PDF instantly — no sign up and no payment wall at download. 10 clean templates, with or without a photo, with a live preview as you type.">
+<meta name="twitter:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ============================================================
+     GOOGLE ADSENSE: SITE-WIDE CODE (goes once per page, in <head>)
+     1. Replace ca-pub-3325482013695295 with your own publisher ID
+        (AdSense account > Account > Account information).
+     2. Uncomment the script tag below.
+     3. Keep this on every page you want ads to appear on.
+   ============================================================ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325482013695295" crossorigin="anonymous"></script>
+<style>
+
+:root{
+  --surface:#E7E8E2;
+  --surface-panel:#F5F6F1;
+  --ink:#1B1E1C;
+  --graphite:#585B52;
+  --safelight:#B23A2E;
+  --safelight-dark:#8F2E24;
+  --scan:#2E6E86;
+  --scan-light:#7FB4C6;
+  --line: rgba(27,30,26,0.14);
+  --radius: 3px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--surface);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button{font-family:inherit;}
+a{color:inherit;}
+main{flex:1 0 auto;}
+
+.wrap{max-width:960px; margin:0 auto; padding:0 24px 48px;}
+
+.site-header{
+  max-width:960px; margin:0 auto; width:100%;
+  padding:28px 24px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+.brand{
+  font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem;
+  letter-spacing:-0.01em; color:var(--ink); text-decoration:none;
+}
+.site-nav{display:flex; gap:24px; flex-wrap:wrap;}
+.site-nav a{
+  font-size:0.85rem; font-weight:500; color:var(--graphite);
+  text-decoration:none; padding:4px 0; border-bottom:1.5px solid transparent;
+}
+.site-nav a:hover{color:var(--scan);}
+.site-nav a.active{color:var(--ink); border-bottom-color:var(--safelight);}
+
+.hero{max-width:640px; margin:0 0 36px;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.12em;
+  color:var(--scan); margin:0 0 14px; font-weight:500;
+}
+.hero h1{
+  font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600;
+  font-size:clamp(2.1rem, 4.6vw, 3.4rem); line-height:1.05; margin:0 0 18px;
+  letter-spacing:-0.01em;
+}
+.hero .sub{font-size:1.02rem; line-height:1.55; color:var(--graphite); margin:0; max-width:52ch;}
+
+.steps{display:flex; gap:28px; margin:0 0 40px; flex-wrap:wrap;}
+.step{display:flex; align-items:baseline; gap:10px;}
+.step .num{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--safelight); font-weight:500;}
+.step .txt{font-size:0.9rem; color:var(--graphite);}
+
+.ad-slot{
+  width:100%;
+  min-height:90px; border:1px dashed rgba(27,30,26,0.22); border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:40px;
+  background:rgba(245,246,241,0.5);
+}
+.ad-slot-label{font-size:0.68rem; letter-spacing:0.08em; color:var(--graphite); opacity:0.6;}
+
+.btn{
+  display:inline-block; border:none; border-radius:5px; padding:12px 22px;
+  font-size:0.9rem; font-weight:600; cursor:pointer; text-decoration:none;
+  transition:background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary{background:var(--safelight); color:#fff;}
+.btn-primary:hover{background:var(--safelight-dark);}
+.btn-dark{background:var(--ink); color:var(--surface-panel);}
+.btn-dark:hover{background:var(--scan);}
+.btn-ghost{background:transparent; color:var(--graphite); border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--scan); color:var(--ink);}
+.btn-sm{padding:7px 14px; font-size:0.8rem;}
+.btn:hover{transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,30,26,0.16);}
+.btn:active{transform:translateY(0); box-shadow:none;}
+.btn:disabled{opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none;}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+
+.icon-badge{
+  width:46px; height:46px; border-radius:50%; background:var(--surface); color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, color .15s ease;
+}
+
+.related-tools{width:100%; margin-top:8px;}
+.related-tools h2{
+  font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem; margin:0 0 18px;
+}
+.related-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;
+  margin-bottom:40px;
+}
+.related-card{
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:6px;
+  padding:16px; text-decoration:none; color:var(--ink);
+  transition:border-color .12s ease, transform .12s ease;
+}
+.related-card:hover{border-color:var(--scan); transform:translateY(-2px);}
+.related-card .icon-badge{width:36px; height:36px; flex:0 0 auto;}
+.related-card .icon-badge svg{width:20px; height:20px;}
+.related-card:hover .icon-badge{background:var(--safelight); color:#fff;}
+.related-card h4{font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; margin:0 0 4px;}
+.related-card p{font-size:0.8rem; color:var(--graphite); line-height:1.4; margin:0;}
+
+.tool-info{width:100%; margin:8px 0 4px;}
+.tool-info h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:0 0 14px;}
+.tool-info p{font-size:0.96rem; line-height:1.7; color:var(--graphite); margin:0 0 16px; max-width:64ch;}
+.faq-item{margin-bottom:18px;}
+.faq-item h3{font-family:'Fraunces',serif; font-weight:600; font-size:1rem; margin:0 0 6px;}
+.faq-item p{margin:0; max-width:64ch;}
+
+.site-footer{max-width:960px; width:100%; margin:0 auto; padding:0 24px 40px;}
+.footer-row{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--line); padding-top:18px; font-size:0.74rem; color:var(--graphite);
+}
+.footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+.footer-nav a{color:var(--graphite); text-decoration:none;}
+.footer-nav a:hover{color:var(--scan);}
+
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible{
+  outline:2px solid var(--scan); outline-offset:2px;
+}
+
+@media (max-width:520px){
+  .site-header{padding:22px 16px 16px;}
+  .wrap{padding:0 16px 40px;}
+}
+
+/* ---------- Template picker ---------- */
+.template-section{margin-bottom:28px;}
+.template-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:10px;
+}
+.template-card{
+  background:var(--surface-panel); border:2px solid var(--line); border-radius:8px;
+  padding:12px 10px; cursor:pointer; text-align:left; position:relative;
+  transition:border-color .12s ease, transform .12s ease;
+  font-family:inherit; color:var(--ink);
+}
+.template-card:hover{border-color:var(--scan); transform:translateY(-2px);}
+.template-card.selected{border-color:var(--safelight); background:#fff;}
+.template-swatch{
+  width:100%; height:44px; border-radius:4px; margin-bottom:8px;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.template-swatch .swatch-bar{width:60%; height:6px; border-radius:3px;}
+.template-name{font-size:0.82rem; font-weight:600; margin:0 0 2px;}
+.template-desc{font-size:0.7rem; color:var(--graphite); margin:0;}
+.template-photo-tag{
+  position:absolute; top:8px; right:8px; font-family:'IBM Plex Mono',monospace;
+  font-size:0.58rem; letter-spacing:0.04em; background:var(--ink); color:#fff;
+  padding:2px 6px; border-radius:8px;
+}
+
+/* ---------- Builder layout ---------- */
+.builder{
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+  align-items:start; margin-bottom:8px;
+}
+@media (max-width:860px){
+  .builder{grid-template-columns:1fr;}
+}
+.form-panel, .preview-panel{
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:8px;
+  padding:24px;
+}
+.preview-panel{
+  position:sticky; top:20px;
+}
+@media (max-width:860px){
+  .preview-panel{position:static;}
+}
+
+.field-group{margin-bottom:18px;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;}
+@media (max-width:480px){.field-row{grid-template-columns:1fr;}}
+label{
+  display:block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
+  letter-spacing:0.06em; color:var(--graphite); margin-bottom:6px;
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea{
+  width:100%; padding:10px 12px; font-family:'Inter',sans-serif; font-size:0.9rem;
+  color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:5px;
+  resize:vertical;
+}
+input:focus, textarea:focus{outline:2px solid var(--scan); outline-offset:1px; border-color:var(--scan);}
+textarea{min-height:70px; line-height:1.5;}
+
+.photo-upload-row{
+  display:flex; align-items:center; gap:14px; margin-bottom:18px;
+  padding:14px; background:rgba(255,255,255,0.5); border:1px solid var(--line); border-radius:6px;
+}
+.photo-upload-row .thumb{
+  width:52px; height:52px; border-radius:50%; background:var(--surface);
+  border:1px solid var(--line); overflow:hidden; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center; font-size:0.65rem; color:var(--graphite);
+}
+.photo-upload-row .thumb img{width:100%; height:100%; object-fit:cover;}
+.photo-upload-row .upload-text{flex:1; font-size:0.82rem; color:var(--graphite);}
+.photo-upload-row .upload-text strong{color:var(--ink); display:block; font-size:0.86rem; margin-bottom:2px;}
+
+.section-title{
+  font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem;
+  margin:28px 0 14px; padding-top:20px; border-top:1px solid var(--line);
+}
+.section-title:first-child{margin-top:0; padding-top:0; border-top:none;}
+
+.entry-block{
+  border:1px solid var(--line); border-radius:6px; padding:16px; margin-bottom:14px;
+  background:rgba(255,255,255,0.5); position:relative;
+}
+.entry-block .remove-btn{
+  position:absolute; top:12px; right:12px; background:none; border:none; cursor:pointer;
+  color:var(--graphite); font-size:0.75rem; font-family:'IBM Plex Mono',monospace;
+  padding:4px 8px; border-radius:4px;
+}
+.entry-block .remove-btn:hover{color:var(--safelight); background:rgba(178,58,46,0.08);}
+
+/* ---------- Resume preview (shared structure, styled per template) ---------- */
+#resumePreview{
+  background:#fff; border:1px solid var(--line); border-radius:4px;
+  font-family:'Inter',sans-serif; color:#1a1a1a;
+  min-height:400px; overflow:hidden;
+}
+#resumePreview .r-body{padding:36px 32px;}
+#resumePreview .r-header{margin-bottom:18px;}
+#resumePreview .r-name{font-size:1.7rem; font-weight:700; margin:0 0 2px; letter-spacing:-0.01em;}
+#resumePreview .r-title{font-size:1rem; color:var(--safelight); font-weight:600; margin:0 0 10px;}
+#resumePreview .r-contact{font-size:0.8rem; color:#555; margin:0; line-height:1.6;}
+#resumePreview .r-section-title{
+  font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:700;
+  color:var(--ink); border-bottom:2px solid var(--ink); padding-bottom:4px; margin:20px 0 10px;
+}
+#resumePreview .r-section-title:first-of-type{margin-top:0;}
+#resumePreview .r-summary{font-size:0.85rem; line-height:1.6; color:#333;}
+#resumePreview .r-entry{margin-bottom:12px;}
+#resumePreview .r-entry-head{display:flex; justify-content:space-between; gap:10px; font-size:0.88rem; font-weight:700;}
+#resumePreview .r-entry-dates{font-size:0.78rem; color:#666; white-space:nowrap; font-weight:500;}
+#resumePreview .r-bullets{margin:4px 0 0; padding-left:18px; font-size:0.82rem; line-height:1.55; color:#333;}
+#resumePreview .r-bullets li{margin-bottom:2px;}
+#resumePreview .r-skills{display:flex; flex-wrap:wrap; gap:6px;}
+#resumePreview .r-skill-pill{
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:3px 11px; font-size:0.76rem; color:#333;
+}
+#resumePreview .r-empty{color:#999; font-size:0.85rem; font-style:italic; padding:36px 32px;}
+#resumePreview .r-photo{width:76px; height:76px; border-radius:50%; object-fit:cover; flex:0 0 auto; background:#eee;}
+#resumePreview .r-photo-placeholder{
+  width:76px; height:76px; border-radius:50%; border:2px dashed #ccc; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center; font-size:0.62rem; color:#aaa; text-align:center;
+}
+
+/* Templates without a photo: header is a simple block (default above covers "classic") */
+
+/* ---- minimal ---- */
+#resumePreview.tmpl-minimal .r-section-title{
+  border-bottom:1px solid #ddd; text-transform:none; font-weight:600; letter-spacing:0.03em; color:#444;
+}
+#resumePreview.tmpl-minimal .r-name{font-weight:500;}
+#resumePreview.tmpl-minimal .r-title{color:#888; font-weight:500;}
+
+/* ---- modern ---- */
+#resumePreview.tmpl-modern .r-section-title{
+  border-bottom:none; border-left:3px solid var(--safelight); padding-left:8px; padding-bottom:0;
+}
+#resumePreview.tmpl-modern .r-title{color:var(--scan);}
+
+/* ---- compact ---- */
+#resumePreview.tmpl-compact .r-body{padding:26px 24px;}
+#resumePreview.tmpl-compact .r-name{font-size:1.4rem;}
+#resumePreview.tmpl-compact .r-section-title{font-size:0.68rem; margin:14px 0 7px;}
+#resumePreview.tmpl-compact .r-entry{margin-bottom:7px;}
+#resumePreview.tmpl-compact .r-summary, #resumePreview.tmpl-compact .r-bullets{font-size:0.78rem; line-height:1.4;}
+
+/* ---- elegant ---- */
+#resumePreview.tmpl-elegant{font-family:'Fraunces',serif;}
+#resumePreview.tmpl-elegant .r-name{font-family:'Fraunces',serif; font-weight:600;}
+#resumePreview.tmpl-elegant .r-title{font-style:italic; color:#777; font-weight:400;}
+#resumePreview.tmpl-elegant .r-section-title{
+  font-family:'Fraunces',serif; text-transform:none; font-size:0.95rem; border-bottom:1px solid #ccc; letter-spacing:0;
+}
+#resumePreview.tmpl-elegant .r-summary, #resumePreview.tmpl-elegant .r-bullets, #resumePreview.tmpl-elegant .r-entry-head{font-family:'Inter',sans-serif;}
+
+/* ---- bold ---- */
+#resumePreview.tmpl-bold .r-header{background:var(--ink); padding:26px 32px; margin:-36px -32px 20px;}
+#resumePreview.tmpl-bold .r-name{color:#fff;}
+#resumePreview.tmpl-bold .r-title{color:var(--scan-light);}
+#resumePreview.tmpl-bold .r-contact{color:#ccc;}
+#resumePreview.tmpl-bold .r-section-title{border-bottom-color:var(--ink);}
+
+/* ---- photo templates: header becomes a flex row ---- */
+#resumePreview.tmpl-photo-classic .r-header,
+#resumePreview.tmpl-photo-executive .r-header,
+#resumePreview.tmpl-photo-creative .r-header{
+  display:flex; align-items:center; gap:18px;
+}
+#resumePreview.tmpl-photo-classic .r-header-text,
+#resumePreview.tmpl-photo-executive .r-header-text,
+#resumePreview.tmpl-photo-creative .r-header-text{flex:1;}
+
+/* ---- photo-executive: colored band ---- */
+#resumePreview.tmpl-photo-executive .r-header{
+  background:var(--safelight); padding:24px 32px; margin:-36px -32px 20px;
+}
+#resumePreview.tmpl-photo-executive .r-name{color:#fff;}
+#resumePreview.tmpl-photo-executive .r-title{color:#ffd9d4;}
+#resumePreview.tmpl-photo-executive .r-contact{color:#ffe4e0;}
+#resumePreview.tmpl-photo-executive .r-photo,
+#resumePreview.tmpl-photo-executive .r-photo-placeholder{border:3px solid #fff;}
+
+/* ---- photo-creative ---- */
+#resumePreview.tmpl-photo-creative .r-photo,
+#resumePreview.tmpl-photo-creative .r-photo-placeholder{border-radius:14px;}
+#resumePreview.tmpl-photo-creative .r-title{color:var(--scan);}
+#resumePreview.tmpl-photo-creative .r-section-title{
+  background:var(--scan-light); color:#0f3644; border-bottom:none; padding:5px 10px; border-radius:4px;
+}
+
+/* ---- photo-centered ---- */
+#resumePreview.tmpl-photo-centered .r-header{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+#resumePreview.tmpl-photo-centered .r-photo,
+#resumePreview.tmpl-photo-centered .r-photo-placeholder{margin-bottom:10px;}
+#resumePreview.tmpl-photo-centered .r-contact{justify-content:center;}
+
+.preview-toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:10px; flex-wrap:wrap;}
+.preview-toolbar h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; margin:0;}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">TidyToolbox</a>
+  <nav class="site-nav">
+    <a href="tools.html" class="active">Tools</a>
+    <a href="how-to-use.html">How to use</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </nav>
+</header>
+<main class="wrap">
+  <header class="hero">
+    <p class="eyebrow">FORM TO POLISHED PDF</p>
+    <h1>CV / Resume Maker</h1>
+    <p class="sub">Pick a design, fill in your details, and watch a clean resume build itself as you go. No sign up, no account, nothing saved anywhere but this browser.</p>
+  </header>
+
+  <div class="steps">
+    <div class="step"><span class="num mono">01</span><span class="txt">Pick a design</span></div>
+    <div class="step"><span class="num mono">02</span><span class="txt">Fill in your details</span></div>
+    <div class="step"><span class="num mono">03</span><span class="txt">Download the PDF</span></div>
+  </div>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="template-section">
+    <div class="section-title" style="margin-top:0; padding-top:0; border-top:none;">Choose a design</div>
+    <div class="template-grid" id="templateGrid"></div>
+  </div>
+
+  <div class="builder">
+    <!-- ===================== FORM PANEL ===================== -->
+    <div class="form-panel">
+
+      <div id="photoUploadRow" class="photo-upload-row" style="display:none;">
+        <div class="thumb" id="photoThumb">No photo</div>
+        <div class="upload-text">
+          <strong>This design includes a photo</strong>
+          Upload a clear, front facing photo. It stays in your browser only.
+        </div>
+        <input type="file" id="photoInput" accept="image/*" style="max-width:150px;">
+      </div>
+
+      <div class="section-title">Personal details</div>
+      <div class="field-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="fullName">FULL NAME</label>
+          <input type="text" id="fullName" placeholder="Jordan Lee">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="jobTitle">TITLE / ROLE</label>
+          <input type="text" id="jobTitle" placeholder="Frontend Developer">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="email">EMAIL</label>
+          <input type="email" id="email" placeholder="jordan@email.com">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="phone">PHONE</label>
+          <input type="tel" id="phone" placeholder="+1 555 123 4567">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="location">LOCATION</label>
+          <input type="text" id="location" placeholder="Austin, TX">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="website">WEBSITE / LINKEDIN</label>
+          <input type="url" id="website" placeholder="linkedin.com/in/jordanlee">
+        </div>
+      </div>
+
+      <div class="section-title">Summary</div>
+      <div class="field-group">
+        <label for="summary">A FEW LINES ABOUT YOU</label>
+        <textarea id="summary" placeholder="Frontend developer with 5 years of experience building fast, accessible web apps..." style="min-height:90px;"></textarea>
+      </div>
+
+      <div class="section-title">Experience</div>
+      <div id="experienceList"></div>
+      <button class="btn btn-ghost btn-sm" id="addExperienceBtn" type="button">+ Add experience</button>
+
+      <div class="section-title">Education</div>
+      <div id="educationList"></div>
+      <button class="btn btn-ghost btn-sm" id="addEducationBtn" type="button">+ Add education</button>
+
+      <div class="section-title">Skills</div>
+      <div class="field-group">
+        <label for="skills">COMMA SEPARATED</label>
+        <input type="text" id="skills" placeholder="JavaScript, React, CSS, Git">
+      </div>
+
+    </div>
+
+    <!-- ===================== PREVIEW PANEL ===================== -->
+    <div class="preview-panel">
+      <div class="preview-toolbar">
+        <h2>Live preview</h2>
+        <button class="btn btn-primary btn-sm" id="downloadPdfBtn" type="button">Download PDF</button>
+      </div>
+      <div id="resumePreview"></div>
+      <p style="font-size:0.75rem; color:var(--graphite); margin:10px 2px 0;">Your details are saved only in this browser, so they'll still be here if you come back later. Nothing is uploaded anywhere.</p>
+    </div>
+  </div>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="related-tools">
+  <h2>More tools on TidyToolbox</h2>
+  <div class="related-grid">
+    <a href="photo-to-text.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="22" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="12" cy="16" r="2.2" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M8 24l6-5 5 4 4-4 4 4.5" stroke="currentColor" stroke-width="1.4"/>
+      </svg></div>
+      <div>
+        <h4>Photo to Text</h4>
+        <p>Extract editable text from a photo of printed pages.</p>
+      </div>
+    </a>
+    <a href="text-to-handwriting.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 24c3-9 6-13 9-13s3 7 6 7 4-11 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M6 27h22" stroke="currentColor" stroke-width="1.4" opacity="0.4"/>
+      </svg></div>
+      <div>
+        <h4>Text to Handwriting</h4>
+        <p>Turn typed text into a realistic handwritten page.</p>
+      </div>
+    </a>
+    <a href="signature-maker/" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 20c2-5 4-7 6-7s2 4 4 4 3-6 5-6 2 5 5 5 3-3 5-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </svg></div>
+      <div>
+        <h4>Signature Maker</h4>
+        <p>Photo or trackpad drawing to transparent PNG.</p>
+      </div>
+    </a>
+    <a href="photo-to-pdf.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="6" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M10 13h14M10 17h14M10 21h9" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
+      </svg></div>
+      <div>
+        <h4>Photo to PDF</h4>
+        <p>Turn photos into one clean, downloadable PDF.</p>
+      </div>
+    </a>
+    <a href="image-converter.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="7" width="15" height="15" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="15" y="12" width="15" height="15" rx="2" fill="var(--surface-panel)" stroke="currentColor" stroke-width="1.8"/>
+      </svg></div>
+      <div>
+        <h4>Image Format Converter</h4>
+        <p>Convert between PNG, JPEG and WEBP.</p>
+      </div>
+    </a>
+    <a href="qr-generator.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="8" height="8" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="21" y="5" width="8" height="8" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="5" y="21" width="8" height="8" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="21" y="21" width="3" height="3" fill="currentColor"/>
+        <rect x="26" y="21" width="3" height="3" fill="currentColor"/>
+        <rect x="21" y="26" width="3" height="3" fill="currentColor"/>
+        <rect x="26" y="26" width="3" height="3" fill="currentColor"/>
+      </svg></div>
+      <div>
+        <h4>QR Code Generator</h4>
+        <p>Turn a link or text into a QR code.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="tool-info">
+  <h2>A free resume builder with 10 templates, with or without a photo</h2>
+  <p>Pick from 10 generic designs, six plain layouts and four that include a photo, then fill in your details section by section: personal info, a short summary, work experience, education, and skills. The preview updates as you type, so what you see is close to what ends up in the downloaded PDF. When it looks right, hit "Download PDF" to get a clean file ready to send or upload to a job application.</p>
+  <p>Everything runs in your browser. Your details and photo are kept only in this browser's local storage so your draft survives a refresh, and nothing is ever sent to a server.</p>
+
+    <p>Most online resume builders let you do all the work, then hide the download behind a subscription. This one doesn't: the PDF download is free, every template is free, and there is no account, trial, or credit card step between you and your finished resume.</p>
+  <ul>
+    <li><strong>10 templates</strong> covering both styles: photo CV layouts common in Europe, the Middle East, and Asia, and no-photo resume layouts preferred in the US, UK, and Canada</li>
+    <li><strong>Live preview</strong> — the document rebuilds as you type, so what you see is exactly the PDF you download</li>
+    <li><strong>Simple, text-focused layouts</strong> without heavy graphics or tables — the kind of clean structure that automated resume scanners handle best</li>
+    <li><strong>Private by design</strong> — your name, work history, and contact details stay in your browser and are never uploaded or stored on a server</li>
+  </ul>
+  <h2>Make a professional CV in a few minutes</h2>
+  <p>Fill in the form section by section — personal details, work experience, education, skills — pick the template that fits the job you're applying for, and export. Because nothing is locked, you can come back any time, tweak the content, switch templates, and download a fresh PDF for every application.</p>
+
+<div class="faq-item">
+    <h3>Is this resume builder free?</h3>
+    <p>Yes. Building and downloading your resume here is completely free, with no account and no watermark on the PDF.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do I have to use a photo?</h3>
+    <p>No. Six of the ten designs are plain, text only layouts. A photo is only requested if you pick one of the four designs built around one.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is my information or photo stored anywhere?</h3>
+    <p>Only in your own browser's local storage, so your draft is still there if you close the tab and come back. Nothing is uploaded or sent anywhere.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I add more than one job or school?</h3>
+    <p>Yes. Use "Add experience" or "Add education" to add as many entries as you need, and remove any entry you don't want with the small remove link on that entry.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is this resume builder really free to download?</h3>
+    <p>Yes. Unlike many resume sites, the PDF download is not behind a paywall. You build the resume, you download it, and no account or payment is ever requested.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Should my CV include a photo?</h3>
+    <p>It depends on where you're applying. Photo CVs are common in much of Europe, the Middle East, and Asia, while employers in the US, UK, and Canada generally expect no photo. This builder includes templates for both, so pick whichever matches the market.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is my personal information stored anywhere?</h3>
+    <p>No. Everything you type stays in your browser on your own device. Nothing is uploaded, so your work history and contact details are never sitting on someone else's server.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CV / Resume Maker",
+  "url": "https://tidytoolbox.online/cv-resume-maker.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (runs in the browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Build a resume or CV online free and download it as a PDF instantly — no sign up and no payment wall at download. 10 clean templates, with or without a photo, with a live preview as you type.",
+  "featureList": [
+    "10 resume and CV templates",
+    "Templates with or without a photo",
+    "Live preview while you type",
+    "Download as PDF free, no paywall",
+    "No sign up, no account",
+    "Your details never leave your browser"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "TidyToolbox",
+    "url": "https://tidytoolbox.online/"
+  },
+  "alternateName": "Free Resume Builder"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this resume builder free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Building and downloading your resume here is completely free, with no account and no watermark on the PDF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to use a photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Six of the ten designs are plain, text only layouts. A photo is only requested if you pick one of the four designs built around one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my information or photo stored anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only in your own browser's local storage, so your draft is still there if you close the tab and come back. Nothing is uploaded or sent anywhere."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add more than one job or school?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use \"Add experience\" or \"Add education\" to add as many entries as you need, and remove any entry you don't want with the small remove link on that entry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this resume builder really free to download?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Unlike many resume sites, the PDF download is not behind a paywall. You build the resume, you download it, and no account or payment is ever requested."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should my CV include a photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on where you're applying. Photo CVs are common in much of Europe, the Middle East, and Asia, while employers in the US, UK, and Canada generally expect no photo. This builder includes templates for both, so pick whichever matches the market."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my personal information stored anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything you type stays in your browser on your own device. Nothing is uploaded, so your work history and contact details are never sitting on someone else's server."
+      }
+    }
+  ]
+}
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-row">
+    <span class="mono">© 2026 TidyToolbox</span>
+    <nav class="footer-nav">
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const STORAGE_KEY = "tidytoolbox_cv_draft";
+
+  const TEMPLATES = [
+    { id: "classic",          name: "Classic",        hasPhoto: false, desc: "Clean and traditional",       accent: [20,20,20] },
+    { id: "minimal",          name: "Minimal",         hasPhoto: false, desc: "Light and airy",              accent: [60,60,60] },
+    { id: "modern",           name: "Modern",          hasPhoto: false, desc: "Color accent borders",        accent: [178,58,46] },
+    { id: "compact",          name: "Compact",         hasPhoto: false, desc: "Tighter spacing",             accent: [20,20,20] },
+    { id: "elegant",          name: "Elegant",         hasPhoto: false, desc: "Serif throughout",             accent: [90,90,90] },
+    { id: "bold",             name: "Bold Header",     hasPhoto: false, desc: "Dark name banner",             accent: [20,20,20] },
+    { id: "photo-classic",    name: "Photo Classic",   hasPhoto: true,  desc: "Traditional, with photo",      accent: [20,20,20] },
+    { id: "photo-executive",  name: "Executive",       hasPhoto: true,  desc: "Colored header, photo",        accent: [178,58,46] },
+    { id: "photo-creative",   name: "Creative",        hasPhoto: true,  desc: "Teal accents, photo",          accent: [46,110,134] },
+    { id: "photo-centered",   name: "Centered Photo",  hasPhoto: true,  desc: "Centered header, photo",       accent: [20,20,20] }
+  ];
+
+  let currentTemplate = TEMPLATES[0];
+  let photoDataUrl = null;
+
+  const fields = ["fullName", "jobTitle", "email", "phone", "location", "website", "summary", "skills"];
+  const fieldEls = {};
+  fields.forEach(id => { fieldEls[id] = document.getElementById(id); });
+
+  const experienceList = document.getElementById("experienceList");
+  const educationList = document.getElementById("educationList");
+  const resumePreview = document.getElementById("resumePreview");
+  const templateGrid = document.getElementById("templateGrid");
+  const photoUploadRow = document.getElementById("photoUploadRow");
+  const photoInput = document.getElementById("photoInput");
+  const photoThumb = document.getElementById("photoThumb");
+
+  let experienceCount = 0;
+  let educationCount = 0;
+
+  /* ============ TEMPLATE PICKER ============ */
+  function renderTemplateGrid(){
+    templateGrid.innerHTML = "";
+    TEMPLATES.forEach(t => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "template-card" + (t.id === currentTemplate.id ? " selected" : "");
+      const swatchColor = `rgb(${t.accent[0]},${t.accent[1]},${t.accent[2]})`;
+      card.innerHTML = `
+        ${t.hasPhoto ? '<span class="template-photo-tag">PHOTO</span>' : ""}
+        <div class="template-swatch" style="background:#f2f2ef;"><span class="swatch-bar" style="background:${swatchColor};"></span></div>
+        <p class="template-name">${t.name}</p>
+        <p class="template-desc">${t.desc}</p>
+      `;
+      card.addEventListener("click", () => {
+        currentTemplate = t;
+        renderTemplateGrid();
+        updatePhotoRowVisibility();
+        renderPreview();
+        saveDraft();
+      });
+      templateGrid.appendChild(card);
+    });
+  }
+
+  function updatePhotoRowVisibility(){
+    photoUploadRow.style.display = currentTemplate.hasPhoto ? "flex" : "none";
+  }
+
+  photoInput.addEventListener("change", () => {
+    const file = photoInput.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      photoDataUrl = e.target.result;
+      photoThumb.innerHTML = `<img src="${photoDataUrl}" alt="Your photo">`;
+      renderPreview();
+      saveDraft();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  /* ============ EXPERIENCE / EDUCATION ENTRIES ============ */
+  function makeExperienceBlock(data){
+    data = data || {};
+    experienceCount++;
+    const div = document.createElement("div");
+    div.className = "entry-block";
+    div.innerHTML = `
+      <button class="remove-btn" type="button" aria-label="Remove this experience">Remove</button>
+      <div class="field-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label>ROLE</label>
+          <input type="text" class="exp-role" placeholder="Frontend Developer" value="${escapeAttr(data.role || '')}">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label>COMPANY</label>
+          <input type="text" class="exp-company" placeholder="Acme Inc." value="${escapeAttr(data.company || '')}">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>DATES</label>
+        <input type="text" class="exp-dates" placeholder="Jan 2022 to Present" value="${escapeAttr(data.dates || '')}">
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label>DESCRIPTION (ONE POINT PER LINE)</label>
+        <textarea class="exp-desc" placeholder="Led redesign of the checkout flow, cutting drop off by 18%">${escapeHtml(data.desc || '')}</textarea>
+      </div>
+    `;
+    div.querySelector(".remove-btn").addEventListener("click", () => { div.remove(); renderPreview(); saveDraft(); });
+    div.querySelectorAll("input, textarea").forEach(el => el.addEventListener("input", () => { renderPreview(); saveDraft(); }));
+    return div;
+  }
+
+  function makeEducationBlock(data){
+    data = data || {};
+    educationCount++;
+    const div = document.createElement("div");
+    div.className = "entry-block";
+    div.innerHTML = `
+      <button class="remove-btn" type="button" aria-label="Remove this education entry">Remove</button>
+      <div class="field-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label>DEGREE</label>
+          <input type="text" class="edu-degree" placeholder="B.A. Computer Science" value="${escapeAttr(data.degree || '')}">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label>SCHOOL</label>
+          <input type="text" class="edu-school" placeholder="State University" value="${escapeAttr(data.school || '')}">
+        </div>
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label>YEARS</label>
+        <input type="text" class="edu-dates" placeholder="2018 to 2022" value="${escapeAttr(data.dates || '')}">
+      </div>
+    `;
+    div.querySelector(".remove-btn").addEventListener("click", () => { div.remove(); renderPreview(); saveDraft(); });
+    div.querySelectorAll("input").forEach(el => el.addEventListener("input", () => { renderPreview(); saveDraft(); }));
+    return div;
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function escapeAttr(str){ return escapeHtml(str); }
+
+  document.getElementById("addExperienceBtn").addEventListener("click", () => {
+    experienceList.appendChild(makeExperienceBlock());
+    renderPreview(); saveDraft();
+  });
+  document.getElementById("addEducationBtn").addEventListener("click", () => {
+    educationList.appendChild(makeEducationBlock());
+    renderPreview(); saveDraft();
+  });
+
+  fields.forEach(id => {
+    fieldEls[id].addEventListener("input", () => { renderPreview(); saveDraft(); });
+  });
+
+  function getExperienceData(){
+    return Array.from(experienceList.querySelectorAll(".entry-block")).map(block => ({
+      role: block.querySelector(".exp-role").value.trim(),
+      company: block.querySelector(".exp-company").value.trim(),
+      dates: block.querySelector(".exp-dates").value.trim(),
+      desc: block.querySelector(".exp-desc").value.trim()
+    })).filter(e => e.role || e.company || e.dates || e.desc);
+  }
+
+  function getEducationData(){
+    return Array.from(educationList.querySelectorAll(".entry-block")).map(block => ({
+      degree: block.querySelector(".edu-degree").value.trim(),
+      school: block.querySelector(".edu-school").value.trim(),
+      dates: block.querySelector(".edu-dates").value.trim()
+    })).filter(e => e.degree || e.school || e.dates);
+  }
+
+  function getFullState(){
+    const state = {};
+    fields.forEach(id => { state[id] = fieldEls[id].value; });
+    state.experience = getExperienceData();
+    state.education = getEducationData();
+    state.template = currentTemplate.id;
+    state.photoDataUrl = photoDataUrl;
+    return state;
+  }
+
+  /* ============ LIVE PREVIEW ============ */
+  function renderPreview(){
+    const s = getFullState();
+    const hasAnything = s.fullName || s.jobTitle || s.summary || s.experience.length || s.education.length || s.skills;
+
+    resumePreview.className = "tmpl-" + currentTemplate.id;
+
+    if(!hasAnything){
+      resumePreview.innerHTML = '<p class="r-empty">Start filling in the form, your resume will build itself here as you go.</p>';
+      return;
+    }
+
+    const contactParts = [s.email, s.phone, s.location, s.website].filter(Boolean);
+
+    let photoHtml = "";
+    if(currentTemplate.hasPhoto){
+      photoHtml = photoDataUrl
+        ? `<img class="r-photo" src="${photoDataUrl}" alt="">`
+        : `<div class="r-photo-placeholder">Photo</div>`;
+    }
+
+    let headerHtml = `<div class="r-header">`;
+    if(currentTemplate.hasPhoto){
+      headerHtml += photoHtml + `<div class="r-header-text">`;
+    }
+    headerHtml += `<div class="r-name">${escapeHtml(s.fullName) || "Your Name"}</div>`;
+    if(s.jobTitle) headerHtml += `<div class="r-title">${escapeHtml(s.jobTitle)}</div>`;
+    if(contactParts.length) headerHtml += `<div class="r-contact">${contactParts.map(escapeHtml).join(" &nbsp;|&nbsp; ")}</div>`;
+    if(currentTemplate.hasPhoto){
+      headerHtml += `</div>`;
+    }
+    headerHtml += `</div>`;
+
+    let html = `<div class="r-body">` + headerHtml;
+
+    if(s.summary){
+      html += `<div class="r-section-title">Summary</div><div class="r-summary">${escapeHtml(s.summary)}</div>`;
+    }
+
+    if(s.experience.length){
+      html += `<div class="r-section-title">Experience</div>`;
+      s.experience.forEach(e => {
+        html += `<div class="r-entry">
+          <div class="r-entry-head"><span>${escapeHtml(e.role) || "Role"}${e.company ? " &mdash; " + escapeHtml(e.company) : ""}</span><span class="r-entry-dates">${escapeHtml(e.dates)}</span></div>`;
+        if(e.desc){
+          const bullets = e.desc.split("\n").map(l => l.trim()).filter(Boolean);
+          html += `<ul class="r-bullets">${bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}</ul>`;
+        }
+        html += `</div>`;
+      });
+    }
+
+    if(s.education.length){
+      html += `<div class="r-section-title">Education</div>`;
+      s.education.forEach(e => {
+        html += `<div class="r-entry">
+          <div class="r-entry-head"><span>${escapeHtml(e.degree) || "Degree"}${e.school ? " &mdash; " + escapeHtml(e.school) : ""}</span><span class="r-entry-dates">${escapeHtml(e.dates)}</span></div>
+        </div>`;
+      });
+    }
+
+    if(s.skills){
+      const skillList = s.skills.split(",").map(x => x.trim()).filter(Boolean);
+      if(skillList.length){
+        html += `<div class="r-section-title">Skills</div><div class="r-skills">${skillList.map(sk => `<span class="r-skill-pill">${escapeHtml(sk)}</span>`).join("")}</div>`;
+      }
+    }
+
+    html += `</div>`;
+    resumePreview.innerHTML = html;
+  }
+
+  /* ============ SAVE / LOAD DRAFT ============ */
+  function saveDraft(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(getFullState()));
+    }catch(e){ /* storage unavailable, fail silently */ }
+  }
+
+  function loadDraft(){
+    let saved = null;
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) saved = JSON.parse(raw);
+    }catch(e){ saved = null; }
+
+    if(!saved){
+      experienceList.appendChild(makeExperienceBlock());
+      educationList.appendChild(makeEducationBlock());
+      renderTemplateGrid();
+      updatePhotoRowVisibility();
+      renderPreview();
+      return;
+    }
+
+    fields.forEach(id => { if(saved[id] !== undefined) fieldEls[id].value = saved[id]; });
+
+    if(saved.template){
+      const found = TEMPLATES.find(t => t.id === saved.template);
+      if(found) currentTemplate = found;
+    }
+    if(saved.photoDataUrl){
+      photoDataUrl = saved.photoDataUrl;
+      photoThumb.innerHTML = `<img src="${photoDataUrl}" alt="Your photo">`;
+    }
+
+    if(saved.experience && saved.experience.length){
+      saved.experience.forEach(e => experienceList.appendChild(makeExperienceBlock(e)));
+    } else {
+      experienceList.appendChild(makeExperienceBlock());
+    }
+
+    if(saved.education && saved.education.length){
+      saved.education.forEach(e => educationList.appendChild(makeEducationBlock(e)));
+    } else {
+      educationList.appendChild(makeEducationBlock());
+    }
+
+    renderTemplateGrid();
+    updatePhotoRowVisibility();
+    renderPreview();
+  }
+
+  /* ============ PDF EXPORT ============ */
+  const PDF_HEADER_STYLES = {
+    "classic":         { band:null },
+    "minimal":         { band:null },
+    "modern":          { band:null },
+    "compact":         { band:null },
+    "elegant":         { band:null },
+    "bold":            { band:[20,20,20],  text:[255,255,255], sub:[127,180,198], contact:[210,210,210] },
+    "photo-classic":   { band:null },
+    "photo-executive": { band:[178,58,46], text:[255,255,255], sub:[255,217,212], contact:[255,228,224] },
+    "photo-creative":  { band:null },
+    "photo-centered":  { band:null }
+  };
+
+  document.getElementById("downloadPdfBtn").addEventListener("click", () => {
+    try{
+      if(!window.jspdf || !window.jspdf.jsPDF){
+        alert("The PDF library hasn't finished loading yet (this needs an internet connection). Please wait a moment and try again.");
+        return;
+      }
+
+      const s = getFullState();
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      const accent = currentTemplate.accent;
+      const style = PDF_HEADER_STYLES[currentTemplate.id] || { band: null };
+
+      const marginX = 48;
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const contentWidth = pageWidth - marginX * 2;
+      let textStartX = marginX;
+
+      function ensureSpace(needed){
+        if(y + needed > pageHeight - 40){
+          doc.addPage();
+          y = 56;
+        }
+      }
+
+      const contactParts = [s.email, s.phone, s.location, s.website].filter(Boolean);
+
+      // Work out how tall the header needs to be before drawing anything,
+      // so a colored band (if this template has one) can be painted first.
+      const topPad = 26, bottomPad = 22;
+      let bandHeight = topPad + 24;
+      if(s.jobTitle) bandHeight += 18;
+      if(contactParts.length) bandHeight += 18;
+      bandHeight += bottomPad;
+      if(currentTemplate.hasPhoto){
+        bandHeight = Math.max(bandHeight, topPad + 64 + bottomPad);
+      }
+
+      let y = topPad + 16;
+
+      if(style.band){
+        doc.setFillColor(style.band[0], style.band[1], style.band[2]);
+        doc.rect(0, 0, pageWidth, bandHeight, "F");
+      }
+
+      // Photo (if this template has one and one was uploaded), vertically
+      // centered within the header band.
+      if(currentTemplate.hasPhoto && s.photoDataUrl){
+        try{
+          const imgSize = 64;
+          const imgY = (bandHeight - imgSize) / 2;
+          doc.addImage(s.photoDataUrl, marginX, imgY, imgSize, imgSize, undefined, "FAST");
+          textStartX = marginX + imgSize + 16;
+        }catch(imgErr){
+          console.warn("Could not embed photo in PDF:", imgErr);
+        }
+      }
+
+      const nameColor = style.band ? style.text : [20, 20, 20];
+      const subColor = style.band ? style.sub : accent;
+      const contactColor = style.band ? style.contact : [85, 85, 85];
+
+      if(style.band){
+        const textBlockHeight = 24 + (s.jobTitle ? 18 : 0) + (contactParts.length ? 18 : 0);
+        y = (bandHeight - textBlockHeight) / 2 + 18;
+      }
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.setTextColor(nameColor[0], nameColor[1], nameColor[2]);
+      doc.text(s.fullName || "Your Name", textStartX, y);
+      y += 24;
+
+      if(s.jobTitle){
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(subColor[0], subColor[1], subColor[2]);
+        doc.text(s.jobTitle, textStartX, y);
+        y += 18;
+      }
+
+      if(contactParts.length){
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(contactColor[0], contactColor[1], contactColor[2]);
+        doc.text(contactParts.join("   |   "), textStartX, y);
+        y += 18;
+      }
+
+      y = Math.max(y, bandHeight) + 14;
+
+      function sectionHeader(title){
+        ensureSpace(30);
+        y += 6;
+        doc.setDrawColor(accent[0], accent[1], accent[2]);
+        doc.setLineWidth(1.1);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10.5);
+        doc.setTextColor(20, 20, 20);
+        doc.text(title.toUpperCase(), marginX, y);
+        y += 4;
+        doc.line(marginX, y, pageWidth - marginX, y);
+        y += 16;
+      }
+
+      if(s.summary){
+        sectionHeader("Summary");
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(40, 40, 40);
+        const lines = doc.splitTextToSize(s.summary, contentWidth);
+        ensureSpace(lines.length * 12);
+        doc.text(lines, marginX, y);
+        y += lines.length * 12 + 8;
+      }
+
+      if(s.experience.length){
+        sectionHeader("Experience");
+        s.experience.forEach(e => {
+          ensureSpace(30);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10.5);
+          doc.setTextColor(20, 20, 20);
+          const headLeft = e.role + (e.company ? "  \u2014  " + e.company : "");
+          doc.text(headLeft, marginX, y);
+
+          if(e.dates){
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.setTextColor(90, 90, 90);
+            const dateWidth = doc.getTextWidth(e.dates);
+            doc.text(e.dates, pageWidth - marginX - dateWidth, y);
+          }
+          y += 14;
+
+          if(e.desc){
+            const bullets = e.desc.split("\n").map(l => l.trim()).filter(Boolean);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9.5);
+            doc.setTextColor(40, 40, 40);
+            bullets.forEach(b => {
+              const lines = doc.splitTextToSize("\u2022  " + b, contentWidth - 10);
+              ensureSpace(lines.length * 12);
+              doc.text(lines, marginX + 6, y);
+              y += lines.length * 12 + 2;
+            });
+          }
+          y += 8;
+        });
+      }
+
+      if(s.education.length){
+        sectionHeader("Education");
+        s.education.forEach(e => {
+          ensureSpace(20);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10.5);
+          doc.setTextColor(20, 20, 20);
+          const headLeft = e.degree + (e.school ? "  \u2014  " + e.school : "");
+          doc.text(headLeft, marginX, y);
+
+          if(e.dates){
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.setTextColor(90, 90, 90);
+            const dateWidth = doc.getTextWidth(e.dates);
+            doc.text(e.dates, pageWidth - marginX - dateWidth, y);
+          }
+          y += 20;
+        });
+      }
+
+      if(s.skills){
+        const skillList = s.skills.split(",").map(x => x.trim()).filter(Boolean);
+        if(skillList.length){
+          sectionHeader("Skills");
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9.5);
+          doc.setTextColor(40, 40, 40);
+          const lines = doc.splitTextToSize(skillList.join("   \u2022   "), contentWidth);
+          ensureSpace(lines.length * 13);
+          doc.text(lines, marginX, y);
+          y += lines.length * 13;
+        }
+      }
+
+      const fileName = (s.fullName ? s.fullName.trim().replace(/\s+/g, "-").toLowerCase() : "resume") + ".pdf";
+      doc.save(fileName);
+
+    }catch(err){
+      console.error("PDF generation failed:", err);
+      alert("Something went wrong generating the PDF. Your details are still safe in the form, please try again.");
+    }
+  });
+
+  loadDraft();
+
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://tidytoolbox.online/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "All tools",
+      "item": "https://tidytoolbox.online/tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CV / Resume Maker",
+      "item": "https://tidytoolbox.online/cv-resume-maker.html"
+    }
+  ]
+}
+</script>
+</body>
+</html>

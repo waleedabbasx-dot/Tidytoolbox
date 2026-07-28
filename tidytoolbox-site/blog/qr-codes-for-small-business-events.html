@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Codes for Small Business Events: A Practical Guide | TidyToolbox</title>
+<meta name="description" content="Where QR codes actually help at a small business event, table numbers, check in links, menus, and how to generate a whole batch of them at once from a CSV.">
+<link rel="canonical" href="https://tidytoolbox.online/blog/qr-codes-for-small-business-events.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="TidyToolbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QR Codes for Small Business Events: A Practical Guide | TidyToolbox">
+<meta property="og:description" content="Where QR codes actually help at a small business event, table numbers, check in links, menus, and how to generate a whole batch of them at once from a CSV.">
+<meta property="og:url" content="https://tidytoolbox.online/blog/qr-codes-for-small-business-events.html">
+<meta property="og:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QR Codes for Small Business Events: A Practical Guide | TidyToolbox">
+<meta name="twitter:description" content="Where QR codes actually help at a small business event, table numbers, check in links, menus, and how to generate a whole batch of them at once from a CSV.">
+<meta name="twitter:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="../assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ============================================================
+     GOOGLE ADSENSE: SITE-WIDE CODE (goes once per page, in <head>)
+     1. Replace ca-pub-3325482013695295 with your own publisher ID
+        (AdSense account > Account > Account information).
+     2. Uncomment the script tag below.
+     3. Keep this on every page you want ads to appear on.
+   ============================================================ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325482013695295" crossorigin="anonymous"></script>
+<style>
+
+:root{
+  --surface:#E7E8E2;
+  --surface-panel:#F5F6F1;
+  --ink:#1B1E1C;
+  --graphite:#585B52;
+  --safelight:#B23A2E;
+  --safelight-dark:#8F2E24;
+  --scan:#2E6E86;
+  --scan-light:#7FB4C6;
+  --line: rgba(27,30,26,0.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit;}
+main{flex:1 0 auto;}
+
+.site-header{
+  max-width:960px; margin:0 auto; width:100%; padding:28px 24px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.brand{font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.site-nav{display:flex; gap:24px; flex-wrap:wrap;}
+.site-nav a{font-size:0.85rem; font-weight:500; color:var(--graphite); text-decoration:none; padding:4px 0; border-bottom:1.5px solid transparent;}
+.site-nav a:hover{color:var(--scan);}
+.site-nav a.active{color:var(--ink); border-bottom-color:var(--safelight);}
+
+.ad-slot{
+  width:100%; min-height:90px; border:1px dashed rgba(27,30,26,0.22); border-radius:4px;
+  display:flex; align-items:center; justify-content:center; margin-bottom:40px;
+  background:rgba(245,246,241,0.5);
+}
+.ad-slot-label{font-size:0.68rem; letter-spacing:0.08em; color:var(--graphite); opacity:0.6;}
+
+.btn{
+  display:inline-block; border:none; border-radius:5px; padding:12px 22px;
+  font-size:0.9rem; font-weight:600; cursor:pointer; text-decoration:none;
+  transition:background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary{background:var(--safelight); color:#fff;}
+.btn-primary:hover{background:var(--safelight-dark); transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,30,26,0.16);}
+
+.content-page{max-width:680px; margin:0 auto; padding:8px 24px 64px;}
+.tag{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--scan); margin:0 0 14px; display:block;}
+.content-page h1{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.9rem, 4vw, 2.6rem); margin:0 0 8px; letter-spacing:-0.01em;}
+.content-page .updated{font-size:0.78rem; color:var(--graphite); margin:0 0 36px;}
+.content-page h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:38px 0 12px;}
+.content-page p{font-size:0.98rem; line-height:1.7; color:var(--ink); margin:0 0 16px;}
+.content-page ul,.content-page ol{margin:0 0 16px; padding-left:22px; font-size:0.98rem; line-height:1.7;}
+.content-page li{margin-bottom:6px;}
+.content-page a{color:var(--scan); text-decoration:underline; text-underline-offset:2px;}
+.content-page .btn-primary{color:#fff; text-decoration:none;}
+.content-page hr{border:none; border-top:1px solid var(--line); margin:40px 0;}
+
+.cta-box{
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:8px;
+  padding:24px; margin:28px 0; text-align:center;
+}
+.cta-box p{margin:0 0 16px;}
+
+.site-footer{max-width:960px; width:100%; margin:0 auto; padding:0 24px 40px;}
+.footer-row{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--line); padding-top:18px; font-size:0.74rem; color:var(--graphite);
+}
+.footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+.footer-nav a{color:var(--graphite); text-decoration:none;}
+.footer-nav a:hover{color:var(--scan);}
+
+a:focus-visible{outline:2px solid var(--scan); outline-offset:2px;}
+
+@media (max-width:520px){
+  .site-header{padding:22px 16px 16px;}
+  .content-page{padding:8px 16px 48px;}
+}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="../index.html" class="brand">TidyToolbox</a>
+  <nav class="site-nav">
+    <a href="../tools.html">Tools</a>
+    <a href="../how-to-use.html">How to use</a>
+    <a href="index.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy-policy.html">Privacy</a>
+  </nav>
+</header>
+<main class="content-page">
+  <span class="tag">QR CODES</span>
+  <h1>QR codes for small business events</h1>
+  <p class="updated mono">A practical guide.</p>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <p>QR codes show up at almost every event now, sometimes usefully, sometimes as a gimmick nobody scans. Here is an honest look at where they actually help at a small business event, and how to generate a whole set of them at once instead of making each one by hand.</p>
+
+  <h2>Where QR codes genuinely help</h2>
+  <p>The pattern that works: a QR code should replace typing or asking a question, not add an extra step. A few places this holds up well:</p>
+  <ul>
+    <li><strong>Check in.</strong> A code on a ticket or table card that links straight to a guest list entry or check in form, faster than a name search at the door.</li>
+    <li><strong>Menus.</strong> A printed code linking to a live, easy to update menu page, useful anywhere prices or items change often.</li>
+    <li><strong>Wi Fi access.</strong> A code that joins guests to the venue network directly, no typing a long password on a phone keyboard.</li>
+    <li><strong>Feedback forms.</strong> A code at the exit linking to a short survey gets more responses than asking people to remember a URL later.</li>
+    <li><strong>Table or booth numbers.</strong> Especially useful at trade shows or vendor fairs, a code per table linking to that vendor's page or contact info.</li>
+  </ul>
+
+  <h2>Where they usually do not help</h2>
+  <p>A QR code that just links to your homepage, with no specific reason to scan it in that exact moment, mostly gets ignored. If the content behind the code is not something the person needs right then, skip it.</p>
+
+  <h2>Generating one code versus generating fifty</h2>
+  <p>For a single code, like a Wi Fi login, typing it into a QR generator by hand takes a few seconds. The problem shows up at scale: an event with forty tables, or two hundred attendee tickets, each needing its own unique code.</p>
+  <p>Making those one at a time does not hold up. This is what batch generation is actually for.</p>
+
+  <h2>How to batch generate QR codes from a spreadsheet</h2>
+  <ol>
+    <li>Open the <a href="../qr-generator.html">QR code generator</a> on TidyToolbox and switch to "Batch from CSV."</li>
+    <li>Put whatever each code should link to or say in the first column of a spreadsheet, a link, a message, a Wi Fi credential.</li>
+    <li>Add a name for each file in the second column, "table 1," "booth 12," whatever makes sense.</li>
+    <li>Save the spreadsheet as a CSV and upload it.</li>
+    <li>Download every code at once as a single ZIP file.</li>
+  </ol>
+
+  <div class="cta-box">
+    <p><strong>Have a list to turn into QR codes?</strong></p>
+    <a href="../qr-generator.html" class="btn btn-primary">Open the QR code generator</a>
+  </div>
+
+  <h2>A couple of practical tips</h2>
+  <p>Print codes larger than feels necessary. A code that scans instantly on a bright screen can be frustratingly slow to scan when printed small on a table card under dim lighting. Test a printed code with a phone camera before printing the full batch.</p>
+  <p>Keep the linked content simple and mobile friendly. Most people scanning a code at an event are on a phone, on the move, often with one hand full.</p>
+
+  <hr>
+  <p>Need a resume for a job fair instead? Try the <a href="../cv-resume-maker.html">resume builder</a>, or browse <a href="../tools.html">all tools</a> on TidyToolbox.</p>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "QR codes for small business events",
+  "url": "https://tidytoolbox.online/blog/qr-codes-for-small-business-events.html",
+  "description": "Where QR codes actually help at a small business event, table numbers, check in links, menus, and how to generate a whole batch of them at once from a CSV.",
+  "author": {
+    "@type": "Organization",
+    "name": "TidyToolbox"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TidyToolbox",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tidytoolbox.online/assets/app-icon-512.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tidytoolbox.online/blog/qr-codes-for-small-business-events.html"
+  },
+  "image": "https://tidytoolbox.online/assets/app-icon-512.png",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-25"
+}
+</script>
+
+<footer class="site-footer">
+  <div class="footer-row">
+    <span class="mono">© 2026 TidyToolbox</span>
+    <nav class="footer-nav">
+      <a href="../about.html">About</a>
+      <a href="../privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

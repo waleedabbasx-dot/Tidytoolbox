@@ -1,0 +1,80 @@
+# Redirect extensionless URLs to the canonical .html versions.
+# force = true is required because Netlify resolves these paths implicitly.
+
+[[redirects]]
+  from = "/qr-generator"
+  to = "/qr-generator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/image-converter"
+  to = "/image-converter.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/photo-to-pdf"
+  to = "/photo-to-pdf.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/photo-to-text"
+  to = "/photo-to-text.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/text-to-handwriting"
+  to = "/text-to-handwriting.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cv-resume-maker"
+  to = "/cv-resume-maker.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tools"
+  to = "/tools.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-to-use"
+  to = "/how-to-use.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/heic-to-jpg"
+  to = "/blog/heic-to-jpg.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/combine-photos-into-one-pdf"
+  to = "/blog/combine-photos-into-one-pdf.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/qr-codes-for-small-business-events"
+  to = "/blog/qr-codes-for-small-business-events.html"
+  status = 301
+  force = true

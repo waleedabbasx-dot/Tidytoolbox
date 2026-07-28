@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image to Text Converter – Free OCR, Photo to Word or PDF | TidyToolbox</title>
+<meta name="description" content="Extract text from any image free with online OCR. Convert a photo, screenshot, or scan of printed text into editable text, then export it as a Word document or PDF. No sign up needed.">
+<link rel="canonical" href="https://tidytoolbox.online/photo-to-text.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="TidyToolbox">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image to Text Converter – Free OCR, Photo to Word or PDF | TidyToolbox">
+<meta property="og:description" content="Extract text from any image free with online OCR. Convert a photo, screenshot, or scan of printed text into editable text, then export it as a Word document or PDF. No sign up needed.">
+<meta property="og:url" content="https://tidytoolbox.online/photo-to-text.html">
+<meta property="og:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Image to Text Converter – Free OCR, Photo to Word or PDF | TidyToolbox">
+<meta name="twitter:description" content="Extract text from any image free with online OCR. Convert a photo, screenshot, or scan of printed text into editable text, then export it as a Word document or PDF. No sign up needed.">
+<meta name="twitter:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- ============================================================
+     GOOGLE ADSENSE: SITE-WIDE CODE (goes once per page, in <head>)
+     1. Replace ca-pub-3325482013695295 with your own publisher ID
+        (AdSense account > Account > Account information).
+     2. Uncomment the script tag below.
+     3. Keep this on every page you want ads to appear on.
+   ============================================================ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325482013695295" crossorigin="anonymous"></script>
+<style>
+
+:root{
+  --surface:#E7E8E2;
+  --surface-panel:#F5F6F1;
+  --ink:#1B1E1C;
+  --graphite:#585B52;
+  --safelight:#B23A2E;
+  --safelight-dark:#8F2E24;
+  --scan:#2E6E86;
+  --scan-light:#7FB4C6;
+  --line: rgba(27,30,26,0.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button{font-family:inherit;}
+a{color:inherit;}
+main{flex:1 0 auto;}
+
+.wrap{max-width:900px; margin:0 auto; padding:0 24px 48px;}
+
+.site-header{
+  max-width:900px; margin:0 auto; width:100%; padding:28px 24px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.brand{font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.site-nav{display:flex; gap:24px; flex-wrap:wrap;}
+.site-nav a{
+  font-size:0.85rem; font-weight:500; color:var(--graphite);
+  text-decoration:none; padding:4px 0; border-bottom:1.5px solid transparent;
+}
+.site-nav a:hover{color:var(--scan);}
+.site-nav a.active{color:var(--ink); border-bottom-color:var(--safelight);}
+.test-badge{
+  font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.06em;
+  background:var(--safelight); color:#fff; padding:3px 9px; border-radius:10px; margin-left:10px; vertical-align:middle;
+}
+
+.hero{max-width:640px; margin:0 0 32px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--scan); margin:0 0 14px; font-weight:500;}
+.hero h1{font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:clamp(2rem, 4.4vw, 3.1rem); line-height:1.05; margin:0 0 18px; letter-spacing:-0.01em;}
+.hero .sub{font-size:1.02rem; line-height:1.55; color:var(--graphite); margin:0; max-width:56ch;}
+
+.steps{display:flex; gap:28px; margin:0 0 32px; flex-wrap:wrap;}
+.step{display:flex; align-items:baseline; gap:10px;}
+.step .num{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--safelight); font-weight:500;}
+.step .txt{font-size:0.9rem; color:var(--graphite);}
+
+.ad-slot{
+  width:100%;
+  min-height:90px; border:1px dashed rgba(27,30,26,0.22); border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:40px;
+  background:rgba(245,246,241,0.5);
+}
+.ad-slot-label{font-size:0.68rem; letter-spacing:0.08em; color:var(--graphite); opacity:0.6;}
+
+.tool-card{background:var(--surface-panel); border:1px solid var(--line); border-radius:8px; padding:28px; margin-bottom:24px;}
+
+.icon-badge{
+  width:46px; height:46px; border-radius:50%; background:var(--surface); color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, color .15s ease;
+}
+
+.related-tools{width:100%; margin-top:8px;}
+.related-tools h2{
+  font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem; margin:0 0 18px;
+}
+.related-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;
+  margin-bottom:40px;
+}
+.related-card{
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:6px;
+  padding:16px; text-decoration:none; color:var(--ink);
+  transition:border-color .12s ease, transform .12s ease;
+}
+.related-card:hover{border-color:var(--scan); transform:translateY(-2px);}
+.related-card .icon-badge{width:36px; height:36px; flex:0 0 auto;}
+.related-card .icon-badge svg{width:20px; height:20px;}
+.related-card:hover .icon-badge{background:var(--safelight); color:#fff;}
+.related-card h4{font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; margin:0 0 4px;}
+.related-card p{font-size:0.8rem; color:var(--graphite); line-height:1.4; margin:0;}
+
+.tool-info{width:100%; margin:8px 0 4px;}
+.tool-info h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:0 0 14px;}
+.tool-info p{font-size:0.96rem; line-height:1.7; color:var(--graphite); margin:0 0 16px; max-width:64ch;}
+.tool-info ul{margin:0 0 16px; padding-left:20px; font-size:0.96rem; line-height:1.7; color:var(--graphite); max-width:64ch;}
+.tool-info li{margin-bottom:6px;}
+.faq-item{margin-bottom:18px;}
+.faq-item h3{font-family:'Fraunces',serif; font-weight:600; font-size:1rem; margin:0 0 6px;}
+.faq-item p{margin:0; max-width:64ch;}
+
+.site-footer{max-width:900px; width:100%; margin:0 auto; padding:0 24px 40px;}
+.footer-row{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--line); padding-top:18px; font-size:0.74rem; color:var(--graphite);
+}
+.footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+.footer-nav a{color:var(--graphite); text-decoration:none;}
+.footer-nav a:hover{color:var(--scan);}
+
+.dropzone{
+  border:2px dashed var(--line); border-radius:6px; padding:36px 20px;
+  text-align:center; cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  color:var(--graphite);
+}
+.dropzone:hover, .dropzone.dragover{border-color:var(--scan); background:rgba(46,110,134,0.05);}
+.dropzone svg{margin-bottom:8px; opacity:0.7;}
+.drop-label{font-size:0.94rem; margin:0 0 4px; color:var(--ink);}
+.drop-label .link{color:var(--scan); text-decoration:underline; text-underline-offset:2px;}
+.drop-sub{font-size:0.78rem; margin:0; opacity:0.8;}
+
+.preview-thumb{max-width:220px; max-height:220px; border-radius:6px; border:1px solid var(--line); margin:18px auto 0; display:block;}
+
+.progress-wrap{margin:20px 0; display:none;}
+.progress-wrap.active{display:block;}
+.progress-label{font-size:0.85rem; color:var(--graphite); margin:0 0 8px;}
+.progress-bar-track{width:100%; height:8px; background:var(--surface); border-radius:4px; overflow:hidden;}
+.progress-bar-fill{height:100%; background:var(--safelight); width:0%; transition:width .2s ease;}
+
+textarea#resultText{
+  width:100%; min-height:220px; padding:14px; font-family:'Inter',sans-serif; font-size:0.92rem;
+  line-height:1.6; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:6px;
+  resize:vertical; margin-top:20px;
+}
+
+.btn{
+  display:inline-block; border:none; border-radius:5px; padding:12px 22px;
+  font-size:0.9rem; font-weight:600; cursor:pointer; text-decoration:none;
+  transition:background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary{background:var(--safelight); color:#fff;}
+.btn-primary:hover{background:var(--safelight-dark);}
+.btn-dark{background:var(--ink); color:var(--surface-panel);}
+.btn-dark:hover{background:var(--scan);}
+.btn-ghost{background:transparent; color:var(--graphite); border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--scan); color:var(--ink);}
+.btn:hover{transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,30,26,0.16);}
+.btn:disabled{opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none;}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+
+.notice{
+  background:var(--surface-panel); border:1px solid var(--line); border-left:3px solid var(--scan);
+  border-radius:4px; padding:14px 18px; margin-bottom:28px; font-size:0.86rem; line-height:1.6; color:var(--graphite);
+}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">TidyToolbox</a>
+  <nav class="site-nav">
+    <a href="tools.html" class="active">Tools</a>
+    <a href="how-to-use.html">How to use</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </nav>
+</header>
+<main class="wrap">
+  <header class="hero">
+    <p class="eyebrow">PRINTED PHOTO TO EDITABLE TEXT</p>
+    <h1>Photo to Text</h1>
+    <p class="sub">Upload a photo of printed text, a book page, a sign, a typed document, a label, and get it back as editable text. Then download it as a PDF or a Word document.</p>
+  </header>
+
+  <div class="notice">
+    This tool is built for printed text and reads it very well: book pages, signs, typed documents, labels, receipts. It can also read some handwriting, but that's a bonus, not the main job, neat, well spaced handwriting sometimes comes through fine, cursive or fast handwriting usually will not. Always check the result and fix anything it got wrong before downloading, whatever the source.
+  </div>
+
+  <div class="steps">
+    <div class="step"><span class="num mono">01</span><span class="txt">Upload a photo</span></div>
+    <div class="step"><span class="num mono">02</span><span class="txt">Review the extracted text</span></div>
+    <div class="step"><span class="num mono">03</span><span class="txt">Download as PDF or Word</span></div>
+  </div>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="tool-card">
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a photo of text">
+      <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" stroke-width="2"/>
+        <circle cx="16" cy="20" r="3.5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M8 32l10-9 8 7 6-6 8 8" stroke="currentColor" stroke-width="1.8"/>
+      </svg>
+      <p class="drop-label">Drop a photo here, or <span class="link">browse</span></p>
+      <p class="drop-sub mono">JPG or PNG. Printed text works best, a clear well lit photo helps most of all</p>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+    </div>
+
+    <img id="previewThumb" class="preview-thumb" hidden alt="Uploaded photo preview">
+
+    <div class="progress-wrap" id="progressWrap">
+      <p class="progress-label mono" id="progressLabel">Reading text</p>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+    </div>
+
+    <textarea id="resultText" placeholder="Extracted text will appear here once a photo has been processed. You can edit it before downloading." hidden></textarea>
+
+    <div class="btn-row" id="downloadRow" style="display:none;">
+      <button class="btn btn-primary" id="downloadPdfBtn" type="button">Download as PDF</button>
+      <button class="btn btn-dark" id="downloadDocxBtn" type="button">Download as Word document</button>
+      <button class="btn btn-ghost" id="resetBtn" type="button">Start over</button>
+    </div>
+  </div>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="related-tools">
+  <h2>More tools on TidyToolbox</h2>
+  <div class="related-grid">
+    <a href="photo-to-pdf.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="6" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M10 13h14M10 17h14M10 21h9" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
+      </svg></div>
+      <div>
+        <h4>Photo to PDF</h4>
+        <p>Turn photos into one clean, downloadable PDF.</p>
+      </div>
+    </a>
+    <a href="image-converter.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="7" width="15" height="15" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="15" y="12" width="15" height="15" rx="2" fill="var(--surface-panel)" stroke="currentColor" stroke-width="1.8"/>
+      </svg></div>
+      <div>
+        <h4>Image Format Converter</h4>
+        <p>Convert between PNG, JPEG and WEBP.</p>
+      </div>
+    </a>
+    <a href="text-to-handwriting.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 20c2-5 4-7 6-7s2 4 4 4 3-6 5-6 2 5 5 5 3-3 5-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </svg></div>
+      <div>
+        <h4>Text to Handwriting</h4>
+        <p>Turn typed text into a realistic handwritten page.</p>
+      </div>
+    </a>
+    <a href="cv-resume-maker.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="4" width="18" height="26" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17" cy="11" r="2.6" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 18h10M12 22h10M12 26h6" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+      </svg></div>
+      <div>
+        <h4>CV / Resume Maker</h4>
+        <p>Build a clean resume and export it.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="tool-info">
+  <h2>A free photo to text converter built for printed pages</h2>
+  <p>Upload a photo of printed text, a book page, a sign, a typed document, a receipt, a label, and this tool reads it and turns it into editable text. Review the result, fix anything it got wrong, then download it as a PDF or a real Word document, not a screenshot, actual selectable text.</p>
+  <p>This runs on the same open source text recognition engine used across the web, tuned for printed characters. It reads printed text very well. It can sometimes read neat, well spaced handwriting too, though that is a bonus rather than the main job, cursive or fast handwriting usually will not come through cleanly. Everything happens in your browser, your photo is never uploaded to a server.</p>
+
+    <p>Under the hood this is an OCR tool (optical character recognition): it reads the letters in your picture and turns them back into real, editable, searchable text. That covers the everyday jobs an image to text converter gets used for:</p>
+  <ul>
+    <li>Copying text from a picture, screenshot, or photo instead of retyping it</li>
+    <li>Converting a photographed page of a book, article, or handout into editable text</li>
+    <li>Turning a scanned document back into a Word file you can actually edit</li>
+    <li>Extracting a quote, address, or reference from a sign, slide, or whiteboard photo</li>
+  </ul>
+  <h2>From picture to Word document or PDF</h2>
+  <p>Once the text is extracted you can copy it, download it as a PDF, or export a real Word document (.docx) — not a picture pasted into a page, but genuine text you can edit, restyle, and search. That makes this a free photo to Word converter as well as a plain image to text tool.</p>
+  <p>Recognition happens entirely in your browser; the photo is never uploaded. Results are best with printed text — books, documents, signs, screenshots — photographed straight-on in decent light. Handwriting recognition is offered as a best effort extra, but neat print will always come out far more accurately.</p>
+
+<div class="faq-item">
+    <h3>Is this photo to text converter free?</h3>
+    <p>Yes. Extracting text from a photo and downloading it as a PDF or Word document is completely free, with no account and no watermark.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does it work on handwriting?</h3>
+    <p>Sometimes, for neat and well spaced handwriting, but printed text is what this tool is built for and reads reliably. Cursive or fast handwriting is a much harder problem for any free tool, always check the extracted text before downloading.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I get the result as a Word document, not just a PDF?</h3>
+    <p>Yes. Once the text is extracted, you can download it as either a PDF or a real DOCX file that opens directly in Word or Google Docs.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is my photo uploaded anywhere?</h3>
+    <p>No. The photo and the text recognition both happen locally in your browser, nothing is sent to a server.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What kind of photos work best?</h3>
+    <p>A clear, well lit, straight on photo of printed text works best: a book page, a printed document, a sign, or a label. Blurry, dark, or heavily angled photos are harder for any text recognition engine to read accurately.</p>
+  </div>
+  <div class="faq-item">
+    <h3>How do I copy text from an image?</h3>
+    <p>Upload the image, let the OCR pass finish, and the recognized text appears ready to copy to your clipboard. You can also download it as a PDF or Word document instead.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can it convert a photo into a Word document?</h3>
+    <p>Yes. After the text is extracted you can export a real .docx file with editable text, which opens in Microsoft Word, Google Docs, and LibreOffice.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What kind of images work best for OCR?</h3>
+    <p>Clear, well-lit, straight-on photos of printed text give the best results. Blurry photos, strong angles, decorative fonts, and handwriting all reduce accuracy.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Photo to Text Converter",
+  "url": "https://tidytoolbox.online/photo-to-text.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (runs in the browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Extract text from any image free with online OCR. Convert a photo, screenshot, or scan of printed text into editable text, then export it as a Word document or PDF. No sign up needed.",
+  "featureList": [
+    "Extract text from photos, scans, and screenshots (OCR)",
+    "Convert an image to an editable Word document",
+    "Export extracted text as a PDF",
+    "Copy recognized text to the clipboard",
+    "Built for printed text",
+    "Runs locally in the browser, no upload"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "TidyToolbox",
+    "url": "https://tidytoolbox.online/"
+  },
+  "alternateName": "Image to Text Converter (OCR)"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this photo to text converter free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Extracting text from a photo and downloading it as a PDF or Word document is completely free, with no account and no watermark."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on handwriting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sometimes, for neat and well spaced handwriting, but printed text is what this tool is built for and reads reliably. Cursive or fast handwriting is a much harder problem for any free tool, always check the extracted text before downloading."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get the result as a Word document, not just a PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Once the text is extracted, you can download it as either a PDF or a real DOCX file that opens directly in Word or Google Docs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my photo uploaded anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The photo and the text recognition both happen locally in your browser, nothing is sent to a server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of photos work best?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A clear, well lit, straight on photo of printed text works best: a book page, a printed document, a sign, or a label. Blurry, dark, or heavily angled photos are harder for any text recognition engine to read accurately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I copy text from an image?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Upload the image, let the OCR pass finish, and the recognized text appears ready to copy to your clipboard. You can also download it as a PDF or Word document instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it convert a photo into a Word document?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. After the text is extracted you can export a real .docx file with editable text, which opens in Microsoft Word, Google Docs, and LibreOffice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of images work best for OCR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clear, well-lit, straight-on photos of printed text give the best results. Blurry photos, strong angles, decorative fonts, and handwriting all reduce accuracy."
+      }
+    }
+  ]
+}
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-row">
+    <span class="mono">© 2026 TidyToolbox</span>
+    <nav class="footer-nav">
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const previewThumb = document.getElementById('previewThumb');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressFill = document.getElementById('progressFill');
+  const resultText = document.getElementById('resultText');
+  const downloadRow = document.getElementById('downloadRow');
+  const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+  const downloadDocxBtn = document.getElementById('downloadDocxBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+  ['dragover','dragenter'].forEach(ev => dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.add('dragover'); }));
+  ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.remove('dragover'); }));
+  dropzone.addEventListener('drop', e => {
+    const file = e.dataTransfer.files[0];
+    if(file) processImage(file);
+  });
+  fileInput.addEventListener('change', () => {
+    if(fileInput.files[0]) processImage(fileInput.files[0]);
+  });
+
+  // A single worker is created once and reused for every photo, rather than
+  // reloading the whole OCR engine from scratch each time, which is what
+  // was making this slow and unreliable before.
+  let workerPromise = null;
+  function getWorker(){
+    if(!workerPromise){
+      if(typeof Tesseract === 'undefined'){
+        return Promise.reject(new Error('Tesseract not loaded'));
+      }
+      workerPromise = Tesseract.createWorker('eng', 1, {
+        logger: info => {
+          if(info.status === 'recognizing text'){
+            const pct = Math.round(info.progress * 100);
+            progressFill.style.width = pct + '%';
+            progressLabel.textContent = 'Reading text: ' + pct + '%';
+          } else if(info.status){
+            progressLabel.textContent = info.status.charAt(0).toUpperCase() + info.status.slice(1) + '…';
+          }
+        }
+      });
+    }
+    return workerPromise;
+  }
+
+  function processImage(file){
+    if(!file.type.startsWith('image/')) return;
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      previewThumb.src = e.target.result;
+      previewThumb.hidden = false;
+    };
+    reader.readAsDataURL(file);
+
+    resultText.hidden = true;
+    downloadRow.style.display = 'none';
+    progressWrap.classList.add('active');
+    progressFill.style.width = '0%';
+    progressLabel.textContent = 'Loading text recognition engine…';
+
+    getWorker()
+      .then(worker => worker.recognize(file))
+      .then(({ data }) => {
+        progressWrap.classList.remove('active');
+        const lines = (data.text || '').split('\n').map(l => l.replace(/\s+$/,'')).join('\n').trim();
+        resultText.value = lines || '';
+        resultText.hidden = false;
+        downloadRow.style.display = 'flex';
+        if(!lines){
+          resultText.placeholder = 'No text was found in that photo. Try a clearer or better lit photo.';
+        } else if(typeof data.confidence === 'number' && data.confidence < 65){
+          progressWrap.classList.add('active');
+          progressFill.style.width = '100%';
+          progressLabel.textContent = 'Done, but the photo was hard to read clearly. Please check the text carefully.';
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        const msg = String(err && err.message || err);
+        if(msg.includes('SecurityError') || msg.includes('cannot be accessed from origin')){
+          progressLabel.textContent = 'This preview environment is blocking the text recognition engine for security reasons. Please open this file directly in your own browser instead of viewing it through a preview, it works correctly there.';
+        } else if(!Tesseract || typeof Tesseract === 'undefined'){
+          progressLabel.textContent = 'Could not load the text recognition engine. Check your connection and try again.';
+        } else {
+          progressLabel.textContent = 'Something went wrong reading this photo. Please try again.';
+        }
+      });
+  }
+
+  resetBtn.addEventListener('click', () => {
+    fileInput.value = '';
+    previewThumb.hidden = true;
+    resultText.value = '';
+    resultText.hidden = true;
+    downloadRow.style.display = 'none';
+    progressWrap.classList.remove('active');
+  });
+
+  /* ============ PDF EXPORT ============ */
+  downloadPdfBtn.addEventListener('click', () => {
+    try{
+      if(!window.jspdf || !window.jspdf.jsPDF){
+        alert('The PDF library has not finished loading yet. Please wait a moment and try again.');
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const marginX = 48;
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const contentWidth = pageWidth - marginX * 2;
+      let y = 56;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(11);
+      doc.setTextColor(20, 20, 20);
+
+      const rawLines = resultText.value.split('\n');
+      rawLines.forEach(line => {
+        const wrapped = doc.splitTextToSize(line || ' ', contentWidth);
+        wrapped.forEach(w => {
+          if(y > pageHeight - 48){
+            doc.addPage();
+            y = 56;
+          }
+          doc.text(w, marginX, y);
+          y += 16;
+        });
+      });
+
+      doc.save('extracted-text.pdf');
+    }catch(err){
+      console.error(err);
+      alert('Something went wrong creating the PDF. Please try again.');
+    }
+  });
+
+  /* ============ DOCX EXPORT ============ */
+  function escapeXml(str){
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+  }
+
+  downloadDocxBtn.addEventListener('click', async () => {
+    try{
+      if(typeof JSZip === 'undefined'){
+        alert('The document builder has not finished loading yet. Please wait a moment and try again.');
+        return;
+      }
+      const zip = new JSZip();
+
+      zip.file("[Content_Types].xml",
+`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`);
+
+      zip.folder("_rels").file(".rels",
+`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`);
+
+      const lines = resultText.value.split('\n');
+      const paragraphs = lines.map(line =>
+        `<w:p><w:r><w:t xml:space="preserve">${escapeXml(line)}</w:t></w:r></w:p>`
+      ).join("");
+
+      zip.folder("word").file("document.xml",
+`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>${paragraphs}</w:body>
+</w:document>`);
+
+      const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'extracted text.docx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }catch(err){
+      console.error(err);
+      alert('Something went wrong creating the Word document. Please try again.');
+    }
+  });
+
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://tidytoolbox.online/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "All tools",
+      "item": "https://tidytoolbox.online/tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Photo to Text Converter",
+      "item": "https://tidytoolbox.online/photo-to-text.html"
+    }
+  ]
+}
+</script>
+</body>
+</html>

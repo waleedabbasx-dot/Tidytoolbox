@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text to Handwriting Converter – Realistic Handwritten Pages, Free | TidyToolbox</title>
+<meta name="description" content="Convert typed text into realistic handwriting on paper, free and online. Pick a handwriting style, page type, and ink color, then download handwritten pages for assignments and notes.">
+<link rel="canonical" href="https://tidytoolbox.online/text-to-handwriting.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="TidyToolbox">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text to Handwriting Converter – Realistic Handwritten Pages, Free | TidyToolbox">
+<meta property="og:description" content="Convert typed text into realistic handwriting on paper, free and online. Pick a handwriting style, page type, and ink color, then download handwritten pages for assignments and notes.">
+<meta property="og:url" content="https://tidytoolbox.online/text-to-handwriting.html">
+<meta property="og:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text to Handwriting Converter – Realistic Handwritten Pages, Free | TidyToolbox">
+<meta name="twitter:description" content="Convert typed text into realistic handwriting on paper, free and online. Pick a handwriting style, page type, and ink color, then download handwritten pages for assignments and notes.">
+<meta name="twitter:image" content="https://tidytoolbox.online/assets/app-icon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="192x192" href="assets/app-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Caveat:wght@400;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Shadows+Into+Light&family=Indie+Flower&family=Homemade+Apple&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ============================================================
+     GOOGLE ADSENSE: SITE-WIDE CODE (goes once per page, in <head>)
+     1. Replace ca-pub-3325482013695295 with your own publisher ID
+        (AdSense account > Account > Account information).
+     2. Uncomment the script tag below.
+     3. Keep this on every page you want ads to appear on.
+   ============================================================ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3325482013695295" crossorigin="anonymous"></script>
+<style>
+
+:root{
+  --surface:#E7E8E2;
+  --surface-panel:#F5F6F1;
+  --ink:#1B1E1C;
+  --graphite:#585B52;
+  --safelight:#B23A2E;
+  --safelight-dark:#8F2E24;
+  --scan:#2E6E86;
+  --scan-light:#7FB4C6;
+  --line: rgba(27,30,26,0.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--surface); color:var(--ink); font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column;
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+button{font-family:inherit;}
+a{color:inherit;}
+main{flex:1 0 auto;}
+
+.wrap{max-width:960px; margin:0 auto; padding:0 24px 48px;}
+
+.site-header{
+  max-width:960px; margin:0 auto; width:100%; padding:28px 24px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.brand{font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.site-nav{display:flex; gap:24px; flex-wrap:wrap;}
+.site-nav a{
+  font-size:0.85rem; font-weight:500; color:var(--graphite);
+  text-decoration:none; padding:4px 0; border-bottom:1.5px solid transparent;
+}
+.site-nav a:hover{color:var(--scan);}
+.site-nav a.active{color:var(--ink); border-bottom-color:var(--safelight);}
+.test-badge{
+  font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:0.06em;
+  background:var(--safelight); color:#fff; padding:3px 9px; border-radius:10px; margin-left:10px; vertical-align:middle;
+}
+
+.hero{max-width:640px; margin:0 0 32px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--scan); margin:0 0 14px; font-weight:500;}
+.hero h1{font-family:'Fraunces',serif; font-optical-sizing:auto; font-weight:600; font-size:clamp(2rem, 4.4vw, 3.1rem); line-height:1.05; margin:0 0 18px; letter-spacing:-0.01em;}
+.hero .sub{font-size:1.02rem; line-height:1.55; color:var(--graphite); margin:0; max-width:56ch;}
+
+.ad-slot{
+  width:100%;
+  min-height:90px; border:1px dashed rgba(27,30,26,0.22); border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:40px;
+  background:rgba(245,246,241,0.5);
+}
+.ad-slot-label{font-size:0.68rem; letter-spacing:0.08em; color:var(--graphite); opacity:0.6;}
+
+.icon-badge{
+  width:46px; height:46px; border-radius:50%; background:var(--surface); color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, color .15s ease;
+}
+
+.related-tools{width:100%; margin-top:8px;}
+.related-tools h2{
+  font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem; margin:0 0 18px;
+}
+.related-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;
+  margin-bottom:40px;
+}
+.related-card{
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:6px;
+  padding:16px; text-decoration:none; color:var(--ink);
+  transition:border-color .12s ease, transform .12s ease;
+}
+.related-card:hover{border-color:var(--scan); transform:translateY(-2px);}
+.related-card .icon-badge{width:36px; height:36px; flex:0 0 auto;}
+.related-card .icon-badge svg{width:20px; height:20px;}
+.related-card:hover .icon-badge{background:var(--safelight); color:#fff;}
+.related-card h4{font-family:'Fraunces',serif; font-weight:600; font-size:0.95rem; margin:0 0 4px;}
+.related-card p{font-size:0.8rem; color:var(--graphite); line-height:1.4; margin:0;}
+
+.tool-info{width:100%; margin:8px 0 4px;}
+.tool-info h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; margin:0 0 14px;}
+.tool-info p{font-size:0.96rem; line-height:1.7; color:var(--graphite); margin:0 0 16px; max-width:64ch;}
+.tool-info ul{margin:0 0 16px; padding-left:20px; font-size:0.96rem; line-height:1.7; color:var(--graphite); max-width:64ch;}
+.tool-info li{margin-bottom:6px;}
+.faq-item{margin-bottom:18px;}
+.faq-item h3{font-family:'Fraunces',serif; font-weight:600; font-size:1rem; margin:0 0 6px;}
+.faq-item p{margin:0; max-width:64ch;}
+
+.site-footer{max-width:960px; width:100%; margin:0 auto; padding:0 24px 40px;}
+.footer-row{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--line); padding-top:18px; font-size:0.74rem; color:var(--graphite);
+}
+.footer-nav{display:flex; gap:18px; flex-wrap:wrap;}
+.footer-nav a{color:var(--graphite); text-decoration:none;}
+.footer-nav a:hover{color:var(--scan);}
+
+.mode-tabs{display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap;}
+.mode-tab{
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:6px;
+  padding:10px 18px; font-size:0.88rem; font-weight:600; color:var(--graphite);
+  cursor:pointer; transition:all .15s ease;
+}
+.mode-tab.active{background:var(--ink); color:var(--surface-panel); border-color:var(--ink);}
+.mode-tab:hover:not(.active){border-color:var(--scan); color:var(--ink);}
+.mode-panel{display:none;}
+.mode-panel.active{display:block;}
+
+.builder{display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; margin-bottom:32px;}
+@media (max-width:820px){.builder{grid-template-columns:1fr;}}
+
+.form-panel, .preview-panel{
+  background:var(--surface-panel); border:1px solid var(--line); border-radius:8px; padding:24px;
+}
+.form-panel h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; margin:0 0 6px;}
+.form-panel .desc{font-size:0.88rem; color:var(--graphite); line-height:1.5; margin:0 0 22px; max-width:64ch;}
+.form-panel ol{font-size:0.88rem; color:var(--graphite); line-height:1.6; margin:0 0 20px; padding-left:22px; max-width:64ch;}
+.form-panel ol li{margin-bottom:6px;}
+.form-panel .desc a, .form-panel ol a{color:var(--scan); text-decoration:underline; text-underline-offset:2px;}
+.preview-panel{position:sticky; top:20px;}
+@media (max-width:820px){.preview-panel{position:static;}}
+
+.field-group{margin-bottom:18px;}
+label{display:block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.06em; color:var(--graphite); margin-bottom:6px;}
+textarea{
+  width:100%; padding:12px; font-family:'Inter',sans-serif; font-size:0.92rem; line-height:1.5;
+  color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:5px; resize:vertical; min-height:160px;
+}
+textarea:focus{outline:2px solid var(--scan); outline-offset:1px; border-color:var(--scan);}
+
+.option-row{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;}
+@media (max-width:480px){.option-row{grid-template-columns:1fr;}}
+select{
+  width:100%; padding:9px 10px; font-family:inherit; font-size:0.88rem; color:var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius:5px;
+}
+.swatch-row{display:flex; gap:8px; margin-top:6px;}
+.swatch{
+  width:30px; height:30px; border-radius:50%; border:2px solid transparent; cursor:pointer;
+}
+.swatch.selected{border-color:var(--ink);}
+
+.slider-row{margin-bottom:16px;}
+.slider-row label{display:flex; justify-content:space-between; align-items:baseline;}
+.slider-row .val{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink);}
+input[type="range"]{width:100%; accent-color:var(--scan); margin-top:6px;}
+
+.dropzone{
+  border:2px dashed var(--line); border-radius:6px; padding:28px 16px;
+  text-align:center; cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  color:var(--graphite); margin-bottom:14px;
+}
+.dropzone:hover, .dropzone.dragover{border-color:var(--scan); background:rgba(46,110,134,0.05);}
+.drop-label{font-size:0.9rem; margin:0 0 4px; color:var(--ink);}
+.drop-label .link{color:var(--scan); text-decoration:underline; text-underline-offset:2px;}
+.drop-sub{font-size:0.74rem; margin:0; opacity:0.8;}
+
+.progress-label{font-size:0.82rem; color:var(--graphite); margin:10px 0 0;}
+
+#previewCanvasWrap{background:#ddd; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; min-height:300px;}
+#previewCanvas{max-width:100%; display:block;}
+
+.btn{
+  display:inline-block; border:none; border-radius:5px; padding:12px 22px;
+  font-size:0.9rem; font-weight:600; cursor:pointer; text-decoration:none;
+  transition:background .12s ease, transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary{background:var(--safelight); color:#fff;}
+.btn-primary:hover{background:var(--safelight-dark);}
+.btn-ghost{background:transparent; color:var(--graphite); border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--scan); color:var(--ink);}
+.btn:hover{transform:translateY(-1px); box-shadow:0 4px 12px rgba(27,30,26,0.16);}
+.btn:disabled{opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none;}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="brand">TidyToolbox</a>
+  <nav class="site-nav">
+    <a href="tools.html" class="active">Tools</a>
+    <a href="how-to-use.html">How to use</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy-policy.html">Privacy</a>
+  </nav>
+</header>
+<main class="wrap">
+  <header class="hero">
+    <p class="eyebrow">TYPED TEXT TO REAL LOOKING PAGE</p>
+    <h1>Text to Handwriting</h1>
+    <p class="sub">Type or paste text and turn it into an image that looks handwritten on real paper.</p>
+  </header>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="builder">
+    <div class="form-panel">
+
+      <div class="field-group">
+        <label for="typedText">YOUR TEXT</label>
+        <textarea id="typedText" placeholder="Type or paste the text you want turned into a handwritten looking page..."></textarea>
+      </div>
+
+      <div class="option-row">
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="fontSelect">HANDWRITING STYLE</label>
+          <select id="fontSelect">
+            <option value="Caveat">Neat cursive</option>
+            <option value="Kalam" selected>Casual</option>
+            <option value="Patrick Hand">Print like</option>
+            <option value="Shadows Into Light">Quick pen</option>
+            <option value="Indie Flower">Rounded, bubbly</option>
+            <option value="Homemade Apple">Messy, authentic</option>
+            <option value="Dancing Script">Elegant cursive</option>
+          </select>
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="paperSelect">PAPER STYLE</label>
+          <select id="paperSelect">
+            <option value="ruled">Ruled paper</option>
+            <option value="blank" selected>Blank paper</option>
+            <option value="grid">Grid paper</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>INK COLOR</label>
+        <div class="swatch-row">
+          <button class="swatch selected" type="button" style="background:#1a2a5e;" data-color="#1a2a5e" aria-label="Blue ink"></button>
+          <button class="swatch" type="button" style="background:#1a1a1a;" data-color="#1a1a1a" aria-label="Black ink"></button>
+          <button class="swatch" type="button" style="background:#4a4a4a;" data-color="#4a4a4a" aria-label="Pencil gray"></button>
+        </div>
+      </div>
+
+      <div class="slider-row">
+        <label for="roughnessSlider">HANDWRITING ROUGHNESS <span class="val mono" id="roughnessVal">55</span></label>
+        <input type="range" id="roughnessSlider" min="0" max="100" value="55">
+      </div>
+      <div class="slider-row">
+        <label for="blotsSlider">INK BLOTS AND PRESSURE SPOTS <span class="val mono" id="blotsVal">20</span></label>
+        <input type="range" id="blotsSlider" min="0" max="100" value="20">
+      </div>
+      <div class="slider-row">
+        <label for="distortionSlider">PAGE TILT <span class="val mono" id="distortionVal">30</span></label>
+        <input type="range" id="distortionSlider" min="0" max="100" value="30">
+      </div>
+      <p style="font-size:0.76rem; color:var(--graphite); margin:0 0 6px;">Tip: wrap any part of your text in two slashes, like //this//, to mark it as bold. The slashes themselves will not show up in the result.</p>
+      <div class="slider-row">
+        <label for="boldSlider">BOLDNESS OF MARKED TEXT <span class="val mono" id="boldVal">45</span></label>
+        <input type="range" id="boldSlider" min="0" max="100" value="45">
+      </div>
+
+      <div class="slider-row">
+        <label for="lineDarknessSlider">RULED LINE DARKNESS <span class="val mono" id="lineDarknessVal">30</span></label>
+        <input type="range" id="lineDarknessSlider" min="0" max="100" value="30">
+      </div>
+      <div class="slider-row">
+        <label for="lineRoughnessSlider">RULED LINE ROUGHNESS <span class="val mono" id="lineRoughnessVal">25</span></label>
+        <input type="range" id="lineRoughnessSlider" min="0" max="100" value="25">
+      </div>
+      <div class="slider-row">
+        <label for="textureSlider">PAPER TEXTURE <span class="val mono" id="textureVal">35</span></label>
+        <input type="range" id="textureSlider" min="0" max="100" value="35">
+      </div>
+      <div class="slider-row">
+        <label for="agingSlider">PAPER AGING <span class="val mono" id="agingVal">15</span></label>
+        <input type="range" id="agingSlider" min="0" max="100" value="15">
+      </div>
+
+      <p style="font-size:0.75rem; color:var(--graphite); margin:4px 0 0;">The page below updates automatically as you change anything.</p>
+    </div>
+
+    <div class="preview-panel">
+      <div id="previewCanvasWrap">
+        <canvas id="previewCanvas" width="900" height="1100"></canvas>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="downloadBtn" type="button" disabled>Download image</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-panel" style="margin-bottom:40px;">
+    <h2>Turning several pages into one document</h2>
+    <p class="desc">This tool exports one page at a time as an image. For anything longer, notes, a letter, a write up spread across several pages, here is a simple way to end up with one clean, natural looking file:</p>
+    <ol>
+      <li>Create each page here and download the image, one per page.</li>
+      <li>Open <a href="photo-to-pdf.html">Photo to PDF</a> and drop in all the page images at once.</li>
+      <li>Choose the "Grayscale" filter for an even, natural paper tone across every page.</li>
+      <li>Reorder the pages if needed, then download the finished PDF.</li>
+    </ol>
+    <a href="photo-to-pdf.html" class="btn btn-primary">Open Photo to PDF →</a>
+  </div>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="related-tools">
+  <h2>More tools on TidyToolbox</h2>
+  <div class="related-grid">
+    <a href="photo-to-text.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="22" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="12" cy="16" r="2.2" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M8 24l6-5 5 4 4-4 4 4.5" stroke="currentColor" stroke-width="1.4"/>
+      </svg></div>
+      <div>
+        <h4>Photo to Text</h4>
+        <p>Extract editable text from a photo of printed pages.</p>
+      </div>
+    </a>
+    <a href="cv-resume-maker.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="4" width="18" height="26" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17" cy="11" r="2.6" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 18h10M12 22h10M12 26h6" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+      </svg></div>
+      <div>
+        <h4>CV / Resume Maker</h4>
+        <p>Build a clean resume and export it.</p>
+      </div>
+    </a>
+    <a href="signature-maker/" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 20c2-5 4-7 6-7s2 4 4 4 3-6 5-6 2 5 5 5 3-3 5-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </svg></div>
+      <div>
+        <h4>Signature Maker</h4>
+        <p>Photo or trackpad drawing to transparent PNG.</p>
+      </div>
+    </a>
+    <a href="photo-to-pdf.html" class="related-card">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="6" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M10 13h14M10 17h14M10 21h9" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
+      </svg></div>
+      <div>
+        <h4>Photo to PDF</h4>
+        <p>Turn photos into one clean, downloadable PDF.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+  <div class="ad-slot" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3325482013695295"
+         data-ad-slot="2866205594"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+<section class="tool-info">
+  <h2>A free text to handwriting generator</h2>
+  <p>Type or paste any text and this tool turns it into an image that looks handwritten on a real page, complete with natural baseline wobble, pen pressure variation, and paper texture, not just a cursive font pasted onto a plain background. Choose a handwriting style, a paper type, an ink color, and adjust roughness, boldness, and paper aging to match the look you want.</p>
+  <p>Wrap any part of your text in double slashes, like this, to mark it bold in the result. Everything runs in your browser and downloads as a PNG image, nothing you type is uploaded anywhere.</p>
+
+    <p>This handwriting generator is built to pass the glance test: the letters sit on the ruled lines the way a pen would, the ink has natural weight, and the paper looks like a photographed page rather than a flat white rectangle. Students use it to turn typed notes into handwritten assignment pages, and it works just as well for handwritten-style letters, journal pages, and creative projects.</p>
+  <ul>
+    <li>Several handwriting styles, from neat to casual</li>
+    <li>Paper options including ruled and plain pages</li>
+    <li>Ink colors and adjustable boldness to mimic different pens</li>
+    <li>Long text flows across as many pages as it needs</li>
+  </ul>
+  <h2>From typed assignment to handwritten PDF</h2>
+  <p>Paste your text, pick a style and paper, and download each page as an image. If you need one document for submission, drop the downloaded pages into the <a href="photo-to-pdf.html">photo to PDF converter</a> and they'll be combined into a single handwritten-looking PDF in the right order. Everything runs in your browser, so your text is never uploaded anywhere.</p>
+
+<div class="faq-item">
+    <h3>Is this handwriting generator free?</h3>
+    <p>Yes. Creating and downloading a handwritten looking image is completely free, with no account and no watermark.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I make part of the text bold?</h3>
+    <p>Yes. Wrap the text you want emphasized in two slashes, for example an important deadline, and it renders bolder in the result. The slashes themselves do not appear in the final image.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I make the page look old or worn instead of clean?</h3>
+    <p>Yes. The paper texture and paper aging sliders add uneven tone, soft stains, and a warm aged tint, for anything from a fresh notebook page to a worn, older looking sheet.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does it support paragraph breaks?</h3>
+    <p>Yes. A blank line in your text becomes a real gap in the handwritten page, the same way it would on paper.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I create a multi page document?</h3>
+    <p>Yes. Download each page as its own image here, then combine them into one PDF using the Photo to PDF tool, choosing the Grayscale filter for an even, natural tone across every page.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can I turn a whole assignment into handwriting?</h3>
+    <p>Yes. Paste the full text and it flows across as many pages as needed. Download the pages and, if you need one file, combine them into a single PDF with the photo to PDF tool on this site.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does the handwriting look real?</h3>
+    <p>It's designed to look like a photographed handwritten page, with natural letter placement on the ruled lines and realistic ink weight. Choosing a style and ink color that match how you'd actually write makes it more convincing.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is this text to handwriting converter free?</h3>
+    <p>Yes, completely. There's no sign up, no watermark, and no page limit, and your text never leaves your browser.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Text to Handwriting Converter",
+  "url": "https://tidytoolbox.online/text-to-handwriting.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (runs in the browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Convert typed text into realistic handwriting on paper, free and online. Pick a handwriting style, page type, and ink color, then download handwritten pages for assignments and notes.",
+  "featureList": [
+    "Turn typed text into a realistic handwritten image",
+    "Multiple handwriting styles",
+    "Paper choices including ruled and plain",
+    "Ink color and boldness controls",
+    "Download as an image",
+    "Combine pages into a PDF with the Photo to PDF tool",
+    "Free, no sign up"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "TidyToolbox",
+    "url": "https://tidytoolbox.online/"
+  },
+  "alternateName": "Handwriting Generator"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this handwriting generator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Creating and downloading a handwritten looking image is completely free, with no account and no watermark."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I make part of the text bold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Wrap the text you want emphasized in two slashes, for example an important deadline, and it renders bolder in the result. The slashes themselves do not appear in the final image."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I make the page look old or worn instead of clean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The paper texture and paper aging sliders add uneven tone, soft stains, and a warm aged tint, for anything from a fresh notebook page to a worn, older looking sheet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it support paragraph breaks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A blank line in your text becomes a real gap in the handwritten page, the same way it would on paper."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create a multi page document?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Download each page as its own image here, then combine them into one PDF using the Photo to PDF tool, choosing the Grayscale filter for an even, natural tone across every page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I turn a whole assignment into handwriting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Paste the full text and it flows across as many pages as needed. Download the pages and, if you need one file, combine them into a single PDF with the photo to PDF tool on this site."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the handwriting look real?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's designed to look like a photographed handwritten page, with natural letter placement on the ruled lines and realistic ink weight. Choosing a style and ink color that match how you'd actually write makes it more convincing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this text to handwriting converter free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely. There's no sign up, no watermark, and no page limit, and your text never leaves your browser."
+      }
+    }
+  ]
+}
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-row">
+    <span class="mono">© 2026 TidyToolbox</span>
+    <nav class="footer-nav">
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const typedText = document.getElementById('typedText');
+
+  const swatches = document.querySelectorAll('.swatch');
+  let selectedColor = '#1a2a5e';
+  swatches.forEach(sw => sw.addEventListener('click', () => {
+    swatches.forEach(s => s.classList.remove('selected'));
+    sw.classList.add('selected');
+    selectedColor = sw.dataset.color;
+    scheduleRender();
+  }));
+
+  const fontSelect = document.getElementById('fontSelect');
+  const paperSelect = document.getElementById('paperSelect');
+  const roughnessSlider = document.getElementById('roughnessSlider');
+  const blotsSlider = document.getElementById('blotsSlider');
+  const distortionSlider = document.getElementById('distortionSlider');
+  const textureSlider = document.getElementById('textureSlider');
+  const agingSlider = document.getElementById('agingSlider');
+  const lineDarknessSlider = document.getElementById('lineDarknessSlider');
+  const lineRoughnessSlider = document.getElementById('lineRoughnessSlider');
+  const boldSlider = document.getElementById('boldSlider');
+  const boldVal = document.getElementById('boldVal');
+  const roughnessVal = document.getElementById('roughnessVal');
+  const blotsVal = document.getElementById('blotsVal');
+  const distortionVal = document.getElementById('distortionVal');
+  const textureVal = document.getElementById('textureVal');
+  const agingVal = document.getElementById('agingVal');
+  const lineDarknessVal = document.getElementById('lineDarknessVal');
+  const lineRoughnessVal = document.getElementById('lineRoughnessVal');
+  const canvas = document.getElementById('previewCanvas');
+  const ctx = canvas.getContext('2d');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  function getActiveText(){
+    return typedText.value;
+  }
+
+  function showEmptyState(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#FBF9F3';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#999';
+    ctx.font = '20px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Add some text to see the handwritten page here', canvas.width / 2, canvas.height / 2);
+    ctx.textAlign = 'left';
+    downloadBtn.disabled = true;
+  }
+
+  function render(){
+    const text = getActiveText().trim();
+    if(!text){
+      showEmptyState();
+      return;
+    }
+
+    const width = 900, height = 1100;
+    const fontFamily = fontSelect.value;
+    const paperStyle = paperSelect.value;
+    const fontSize = 32;
+    const marginX = 70;
+    const lineHeight = fontSize * 1.65;
+    const firstLineY = 120;
+
+    // Roughness scales every wobble/jitter amount. 50 on the slider is the
+    // baseline "1x" amount, 0 is nearly perfect, 100 is quite messy.
+    const roughness = Number(roughnessSlider.value) / 50;
+    const blotChance = (Number(blotsSlider.value) / 100) * 0.06;
+    const distortion = Number(distortionSlider.value) / 100;
+    const paperTexture = Number(textureSlider.value) / 100;
+    const aging = Number(agingSlider.value) / 100;
+    const lineDarkness = Number(lineDarknessSlider.value) / 100;
+    const lineRoughness = Number(lineRoughnessSlider.value) / 100;
+    const boldStrength = Number(boldSlider.value) / 100;
+
+    ctx.save();
+    ctx.clearRect(0, 0, width, height);
+
+    // Paper distortion: a slight overall page rotation, as if the photo of
+    // the page itself was not taken perfectly straight.
+    const pageRotation = (Math.random() - 0.5) * distortion * 0.05;
+    ctx.translate(width / 2, height / 2);
+    ctx.rotate(pageRotation);
+    ctx.translate(-width / 2, -height / 2);
+
+    ctx.fillStyle = '#FBF9F3';
+    ctx.fillRect(-50, -50, width + 100, height + 100);
+
+    // Draws a line as a series of short segments with random breaks and
+    // slight opacity flicker, like ink that did not transfer evenly onto
+    // real paper, rather than one perfectly continuous stroke.
+    function drawRoughLine(x1, y1, x2, y2, baseOpacity, roughnessAmt, rgb){
+      const length = Math.hypot(x2 - x1, y2 - y1);
+      if(length <= 0) return;
+      const dirX = (x2 - x1) / length;
+      const dirY = (y2 - y1) / length;
+      let pos = 0;
+      while(pos < length){
+        const segLen = 10 + Math.random() * 40;
+        const endPos = Math.min(length, pos + segLen);
+        const skip = roughnessAmt > 0 && Math.random() < (roughnessAmt * 0.45);
+        if(!skip){
+          const localOpacity = Math.max(0, baseOpacity * (1 - Math.random() * roughnessAmt * 0.5));
+          ctx.strokeStyle = 'rgba(' + rgb + ',' + localOpacity + ')';
+          ctx.beginPath();
+          ctx.moveTo(x1 + dirX * pos, y1 + dirY * pos);
+          ctx.lineTo(x1 + dirX * endPos, y1 + dirY * endPos);
+          ctx.stroke();
+        }
+        const gap = skip ? (Math.random() * roughnessAmt * 20) : 0;
+        pos = endPos + gap;
+      }
+    }
+
+    const lineOpacity = 0.15 + lineDarkness * 0.55;
+
+    if(paperStyle === 'ruled'){
+      ctx.lineWidth = 1;
+      let ly = firstLineY;
+      while(ly < height - 40){
+        drawRoughLine(marginX - 20, ly, width - 40, ly, lineOpacity, lineRoughness, '100,130,180');
+        ly += lineHeight;
+      }
+      ctx.strokeStyle = 'rgba(200,80,80,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(marginX - 40, 40);
+      ctx.lineTo(marginX - 40, height - 40);
+      ctx.stroke();
+    } else if(paperStyle === 'grid'){
+      ctx.lineWidth = 1;
+      for(let gx = 30; gx < width - 30; gx += 34){
+        drawRoughLine(gx, 30, gx, height - 30, lineOpacity, lineRoughness, '100,130,180');
+      }
+      for(let gy = 30; gy < height - 30; gy += 34){
+        drawRoughLine(30, gy, width - 30, gy, lineOpacity, lineRoughness, '100,130,180');
+      }
+    }
+
+    // Paper grain: a scatter of faint light/dark specks so the page does not
+    // look like a flat digital fill.
+    const grainCount = Math.floor(width * height * 0.02);
+    for(let i = 0; i < grainCount; i++){
+      const gx = Math.random() * width;
+      const gy = Math.random() * height;
+      const shade = Math.random() < 0.5 ? 0 : 255;
+      ctx.fillStyle = 'rgba(' + shade + ',' + shade + ',' + shade + ',' + (Math.random() * 0.04) + ')';
+      ctx.fillRect(gx, gy, 1, 1);
+    }
+
+    // Paper texture: soft, irregular, low opacity blotches that vary the
+    // paper's tone the way real fibers and pulp unevenness do. Deliberately
+    // soft-edged (radial gradients, not shapes with hard borders) so nothing
+    // reads as a drawn line or a glitch.
+    const textureBlobCount = Math.round(paperTexture * 35);
+    for(let i = 0; i < textureBlobCount; i++){
+      const bx = Math.random() * width;
+      const by = Math.random() * height;
+      const br = 30 + Math.random() * 90;
+      const warmth = Math.random() < 0.5;
+      const tone = warmth ? '200,190,165' : '150,150,150';
+      const grad = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+      grad.addColorStop(0, 'rgba(' + tone + ',' + (0.05 * paperTexture) + ')');
+      grad.addColorStop(1, 'rgba(' + tone + ',0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(bx, by, br, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Paper aging: a warm overall tint plus a few soft stain blotches, and a
+    // stronger, warmer-toned darkening toward the edges.
+    if(aging > 0){
+      ctx.fillStyle = 'rgba(180,140,70,' + (0.05 * aging) + ')';
+      ctx.fillRect(0, 0, width, height);
+
+      const stainCount = Math.round(aging * 4);
+      for(let i = 0; i < stainCount; i++){
+        const sx = Math.random() * width;
+        const sy = Math.random() * height;
+        const sr = 40 + Math.random() * 100;
+        const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr);
+        grad.addColorStop(0, 'rgba(140,100,50,' + (0.10 * aging) + ')');
+        grad.addColorStop(1, 'rgba(140,100,50,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      const edgeGrad = ctx.createRadialGradient(width/2, height/2, height*0.3, width/2, height/2, height*0.72);
+      edgeGrad.addColorStop(0, 'rgba(90,60,20,0)');
+      edgeGrad.addColorStop(1, 'rgba(90,60,20,' + (0.12 * aging) + ')');
+      ctx.fillStyle = edgeGrad;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = fontSize + 'px "' + fontFamily + '"';
+
+    const maxWidth = width - marginX * 2 + 10;
+
+    // Text wrapped in two slashes, like //this//, is treated as marked or
+    // bold text. This turns a line into a stream of {ch, bold} tokens with
+    // the slashes themselves removed, rather than a plain string.
+    function parseBoldTokens(str){
+      const tokens = [];
+      let bold = false;
+      let i = 0;
+      while(i < str.length){
+        if(str[i] === '/' && str[i+1] === '/'){
+          bold = !bold;
+          i += 2;
+          continue;
+        }
+        tokens.push({ ch: str[i], bold: bold });
+        i++;
+      }
+      return tokens;
+    }
+    function tokensToString(tokens){
+      return tokens.map(t => t.ch).join('');
+    }
+
+    // Wrap line by line instead of treating the whole text as one stream of
+    // words, so blank lines the user actually typed (paragraph breaks) are
+    // preserved as real gaps instead of being silently swallowed.
+    const rawLines = text.replace(/\r/g, '').split('\n');
+    const lines = [];
+    rawLines.forEach(rawLine => {
+      const trimmed = rawLine.trim();
+      if(!trimmed){
+        lines.push(null); // null marks a blank line: advance spacing, draw nothing
+        return;
+      }
+
+      const allTokens = parseBoldTokens(trimmed);
+      const wordGroups = [];
+      let currentGroup = [];
+      allTokens.forEach(tok => {
+        if(tok.ch === ' '){
+          if(currentGroup.length){ wordGroups.push(currentGroup); currentGroup = []; }
+        } else {
+          currentGroup.push(tok);
+        }
+      });
+      if(currentGroup.length) wordGroups.push(currentGroup);
+
+      let currentLine = [];
+      wordGroups.forEach(wordTokens => {
+        const testTokens = currentLine.length
+          ? currentLine.concat([{ ch: ' ', bold: false }], wordTokens)
+          : wordTokens;
+        const testStr = tokensToString(testTokens);
+        if(ctx.measureText(testStr).width > maxWidth && currentLine.length){
+          lines.push(currentLine);
+          currentLine = wordTokens;
+        } else {
+          currentLine = testTokens;
+        }
+      });
+      if(currentLine.length) lines.push(currentLine);
+    });
+
+    let y = firstLineY;
+    // A slowly drifting pen tilt, rather than a fresh random angle every
+    // character, is closer to how a real hand actually moves across a line.
+    let penTilt = 0;
+    const boldStrokeWidth = boldStrength * 2.6;
+
+    lines.forEach(line => {
+      if(y > height - 40) return;
+
+      if(line === null){
+        y += lineHeight;
+        return;
+      }
+
+      let x = marginX;
+      let baselineDrift = 0;
+
+      for(const tok of line){
+        const ch = tok.ch;
+        const isBold = tok.bold && boldStrength > 0;
+
+        penTilt += (Math.random() - 0.5) * 0.03 * roughness;
+        penTilt = Math.max(-0.06 * roughness, Math.min(0.06 * roughness, penTilt));
+        baselineDrift += (Math.random() - 0.5) * 1.4 * roughness;
+        baselineDrift = Math.max(-5 * roughness, Math.min(5 * roughness, baselineDrift));
+
+        const charScale = 1 + (Math.random() - 0.5) * 0.12 * roughness;
+        const charSize = fontSize * charScale;
+        const alpha = 1 - Math.random() * 0.18 * roughness;
+
+        ctx.font = charSize + 'px "' + fontFamily + '"';
+        ctx.fillStyle = selectedColor;
+        ctx.globalAlpha = Math.max(0.55, alpha);
+
+        ctx.save();
+        ctx.translate(x, y + baselineDrift);
+        ctx.rotate(penTilt);
+        if(isBold){
+          ctx.lineJoin = 'round';
+          ctx.lineWidth = boldStrokeWidth;
+          ctx.strokeStyle = selectedColor;
+          ctx.strokeText(ch, 0, 0);
+        }
+        ctx.fillText(ch, 0, 0);
+        ctx.restore();
+
+        // Occasional ink blot or pressure spot near this character, like a
+        // pen that pressed a little too hard or paused for a moment.
+        if(ch !== ' ' && Math.random() < blotChance){
+          ctx.globalAlpha = 0.35 + Math.random() * 0.35;
+          ctx.beginPath();
+          const blotR = 0.8 + Math.random() * 1.8;
+          ctx.arc(x + (Math.random() - 0.5) * 6, y + baselineDrift + (Math.random() * 4), blotR, 0, Math.PI * 2);
+          ctx.fillStyle = selectedColor;
+          ctx.fill();
+        }
+
+        const charWidth = ctx.measureText(ch).width + (isBold ? boldStrokeWidth * 0.5 : 0);
+        const spacingJitter = ch === ' ' ? (Math.random() * 3 * roughness) : (Math.random() * 1.2 * roughness - 0.3 * roughness);
+        x += charWidth + spacingJitter;
+      }
+
+      ctx.globalAlpha = 1;
+      y += lineHeight;
+    });
+
+    // A faint vignette so the page reads a little more like a photograph
+    // and a little less like a flat digital rectangle.
+    const gradient = ctx.createRadialGradient(width/2, height/2, height*0.35, width/2, height/2, height*0.75);
+    gradient.addColorStop(0, 'rgba(0,0,0,0)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0.06)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.restore();
+    downloadBtn.disabled = false;
+  }
+
+  // Wait for the handwriting webfonts to actually finish loading before the
+  // first render, otherwise canvas silently falls back to a system font.
+  let fontsReady = false;
+  function withFontsReady(callback){
+    if(fontsReady){ callback(); return; }
+    if(document.fonts && document.fonts.ready){
+      Promise.all([
+        document.fonts.load('32px Caveat'),
+        document.fonts.load('32px Kalam'),
+        document.fonts.load('32px "Patrick Hand"'),
+        document.fonts.load('32px "Shadows Into Light"'),
+        document.fonts.load('32px "Indie Flower"'),
+        document.fonts.load('32px "Homemade Apple"'),
+        document.fonts.load('32px "Dancing Script"')
+      ]).then(() => document.fonts.ready).then(() => { fontsReady = true; callback(); }).catch(callback);
+    } else {
+      callback();
+    }
+  }
+
+  // Live preview: re-render automatically, a short debounce after the last
+  // change, rather than requiring a button press.
+  let renderTimer = null;
+  function scheduleRender(){
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(() => withFontsReady(render), 220);
+  }
+
+  typedText.addEventListener('input', scheduleRender);
+  fontSelect.addEventListener('change', scheduleRender);
+  paperSelect.addEventListener('change', scheduleRender);
+  roughnessSlider.addEventListener('input', () => { roughnessVal.textContent = roughnessSlider.value; scheduleRender(); });
+  blotsSlider.addEventListener('input', () => { blotsVal.textContent = blotsSlider.value; scheduleRender(); });
+  distortionSlider.addEventListener('input', () => { distortionVal.textContent = distortionSlider.value; scheduleRender(); });
+  textureSlider.addEventListener('input', () => { textureVal.textContent = textureSlider.value; scheduleRender(); });
+  agingSlider.addEventListener('input', () => { agingVal.textContent = agingSlider.value; scheduleRender(); });
+  lineDarknessSlider.addEventListener('input', () => { lineDarknessVal.textContent = lineDarknessSlider.value; scheduleRender(); });
+  lineRoughnessSlider.addEventListener('input', () => { lineRoughnessVal.textContent = lineRoughnessSlider.value; scheduleRender(); });
+  boldSlider.addEventListener('input', () => { boldVal.textContent = boldSlider.value; scheduleRender(); });
+
+  // Show the empty state immediately, then render for real once fonts and
+  // any starting text are ready.
+  showEmptyState();
+  withFontsReady(render);
+
+  downloadBtn.addEventListener('click', () => {
+    canvas.toBlob(blob => {
+      if(!blob){ alert('Could not export the image. Please try again.'); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'handwritten page.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, 'image/png');
+  });
+
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://tidytoolbox.online/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "All tools",
+      "item": "https://tidytoolbox.online/tools.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Text to Handwriting Converter",
+      "item": "https://tidytoolbox.online/text-to-handwriting.html"
+    }
+  ]
+}
+</script>
+</body>
+</html>
