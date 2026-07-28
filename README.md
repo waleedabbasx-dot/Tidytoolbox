@@ -4,15 +4,14 @@ https://tidytoolbox.online/
 
 Free browser based utilities that each do one job well. No accounts, no watermarks, no uploads. Every tool runs entirely on the visitor's own device, so files never touch a server.
 
-Why
-
+Why I made this:
 Most free online converters share the same three problems. They make you create an account before you can download anything. They stamp a watermark on the output, or hide the export behind a subscription. And they upload your files to somebody else's server to do work that a modern browser can do locally in a fraction of a second.
 
 That last one bothered me most. Turning a photo of your passport into a PDF should not involve sending your passport to a company you have never heard of.
 
 TidyToolbox does all the processing client side. Nothing is uploaded, nothing is stored, and there is no backend to leak anything in the first place.
 
-Tools
+Tools:
 Tool	What it does
 Photo to PDF	Combine JPG or PNG images into a single PDF. Drag in a whole folder, reorder pages, export
 Image Converter	Convert between PNG, JPG, WEBP, BMP and ICO. Batch mode with ZIP download
