@@ -1,6 +1,6 @@
 TidyToolbox
 
-tidytoolbox.online
+https://tidytoolbox.online/
 
 Free browser based utilities that each do one job well. No accounts, no watermarks, no uploads. Every tool runs entirely on the visitor's own device, so files never touch a server.
 
